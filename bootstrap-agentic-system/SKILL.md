@@ -1,5 +1,6 @@
 ---
 name: bootstrap-agentic-system
+version: "1.0.0"
 description: "Use when: bootstrapping a repository-specific coding agentic system with custom agents, gates, hidden subagents, skills, artifacts, handoffs, bounded knowledge loading, or a prompt-to-skill conversion for agent workflows."
 argument-hint: "Target repo, preferred agent platform, and any known workflow risks"
 disable-model-invocation: true
@@ -146,18 +147,21 @@ Use `templates/bootstrap-file-plan.md`. Mark approval false by default. Do not w
 After approval, create the smallest coherent file batch. Prefer templates and short role contracts over broad narrative docs.
 
 **Knowledge-Index Template Creation Requirement:**
+
 - If the target repository has no knowledge index, create one during generation using this skill's `templates/knowledge-index-schema.md` as the source shape.
 - If the target repository already has a knowledge index, verify that it contains knowledge file paths, `When to read` triggers, token-budget guidance, and artifact-recording rules.
 - Document the knowledge-index location explicitly in the generated Planner agent contract so the Planner knows what to read before selecting knowledge files.
 - Example: In the generated Planner's `.md` or `.agent.md` file, include: "Read `<knowledge-index-path>` before loading any repository knowledge files. Load only files whose `When to read` triggers match the planning task."
 
 **Plan-Schema Template Creation Requirement:**
+
 - If `templates/plan-schema.md` does not exist in the target repository, create it during generation using the source template from this skill's `templates/plan-schema.md`.
 - If `templates/plan-schema.md` already exists in the target repository, verify that it contains the core sections: approval block, filesystem tree, file details, operations, validation, and risks.
 - Document the location of `templates/plan-schema.md` explicitly in the generated Planner agent contract so the Planner knows where to reference it for implementation-plan.md output.
 - Example: In the generated Planner's `.md` or `.agent.md` file, include: "Use `templates/plan-schema.md` as the source template when producing implementation-plan.md artifacts."
 
 **Question-Schema Template Creation Requirement:**
+
 - If `templates/question-schema.md` does not exist in the target repository, create it during generation using the source template from this skill's `templates/question-schema.md`.
 - If `templates/question-schema.md` already exists in the target repository, verify that it contains the core sections: clarification table, answers table, per-question chat block, answer choices, and approval-blocking rule.
 - Document the location of `templates/question-schema.md` explicitly in the generated Planner agent contract so the Planner knows where to reference it for blocking clarification questions and answer records.
@@ -168,6 +172,7 @@ After approval, create the smallest coherent file batch. Prefer templates and sh
 Validate frontmatter, markdown diagnostics, and internal links where tooling is available. Report any validation that could not run.
 
 **Knowledge-Index Validation:**
+
 - Verify that the generated knowledge index exists at the expected path when the file plan includes repository knowledge.
 - Verify that the index contains required sections: purpose, token budget rule, knowledge entries, `When to read` triggers, selection workflow, and artifact record.
 - Verify that the generated Planner agent contract explicitly references the knowledge-index path before any instruction to load knowledge files.
@@ -175,6 +180,7 @@ Validate frontmatter, markdown diagnostics, and internal links where tooling is 
 - Report the file path and validation status in the final response.
 
 **Plan-Schema Template Validation:**
+
 - Verify that `templates/plan-schema.md` exists at the expected path.
 - Verify that the file contains required sections: approval block, filesystem tree, file details, operations timeline, validation commands, and risks/rollback.
 - Verify that the generated Planner agent contract explicitly references `templates/plan-schema.md` by path (not generic wording like "repo template").
@@ -182,6 +188,7 @@ Validate frontmatter, markdown diagnostics, and internal links where tooling is 
 - Report the file path and validation status in the final response.
 
 **Question-Schema Template Validation:**
+
 - Verify that `templates/question-schema.md` exists at the expected path.
 - Verify that the file contains required sections: clarification table, answers table, per-question chat block, answer choices, and approval-blocking rule.
 - Verify that the generated Planner agent contract explicitly references `templates/question-schema.md` by path (not generic wording like "repo question template").
@@ -218,6 +225,7 @@ Keep these optional. During bootstrap clarification, ask whether tracker integra
 Main agents should include gates only where the repository's real workflow risk changes. Do not copy this gate list blindly. Evaluate each candidate, then remove, add, rename, or merge gates so the contract fits the target repo.
 
 **Gate Numbering and Labeling Requirement:**
+
 - Every gate must be labeled and numbered using the format `Gate <n>: <gate name>` (e.g., `Gate 0: Scope Intake`, `Gate 1: Clarification`).
 - Do not use unnumbered gates or omit the word "Gate" from the label.
 - Gates must be numbered sequentially starting from 0 or 1 depending on repo convention, but the number and label must always be explicit.

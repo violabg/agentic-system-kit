@@ -1,6 +1,5 @@
 ---
 name: bootstrap-agentic-system
-version: "1.1.0"
 description: "Use when: bootstrapping a repository-specific coding agentic system with custom agents, gates, hidden subagents, skills, artifacts, handoffs, bounded knowledge loading, or a prompt-to-skill conversion for agent workflows."
 argument-hint: "Target repo, preferred agent platform, and any known workflow risks"
 disable-model-invocation: true

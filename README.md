@@ -4,25 +4,31 @@
 
 ## Skills
 
-- `bootstrap-agentic-system` `1.0.0`: design and install a repo-specific Agentic System after discovery, proposal, approval, and validation.
-- `maintain-agentic-system` `1.0.0`: review and update an existing repo-local Agentic System when the target repository evolves.
+- `bootstrap-agentic-system`: choose this when a repository does not yet have a deliberate agent workflow, or when an existing setup is informal enough that it should be redesigned from first principles. The skill inspects workflow evidence, identifies costly failure modes, proposes a repo-specific Agentic System, waits for file-plan approval, then generates approved agents, skills, templates, gates, and validation notes. Use it by naming the target repository, preferred agent platform if known, and any workflow risks you already care about.
+- `maintain-agentic-system`: choose this when a repository already has an Agentic System and the codebase, team workflow, validation commands, or knowledge docs have changed. The skill detects existing agent-system files, checks whether they still match the repo and kit principles, proposes a maintenance plan, waits for approval, applies only approved updates, and validates structure. Use it by naming the repo, the changed workflow or pain point, and the platform you want to keep supporting.
+
+Both skills are intentionally scoped to agent-system files: instructions, agents, skills, prompts, governance docs, knowledge docs, artifact templates, and session workflows. They do not modify application code, database schema, runtime configuration, or product tests unless a future repo-local system explicitly adds that behavior after approval.
+
+## Which Skill Should I Pick?
+
+Use `bootstrap-agentic-system` when you are creating the system: new repo, no clear gates, no durable planner/implementor/tester roles, no knowledge index, or a prompt collection that should become a coherent workflow.
+
+Use `maintain-agentic-system` when you are repairing or evolving the system: stale instructions, missing validation commands, outdated knowledge docs, weak approval gates, changed issue workflow, or agent roles that no longer match how the repo works.
 
 ## Versioning
 
-Each public skill carries a `version` field in `SKILL.md` frontmatter and follows Semantic Versioning.
+Skill versions live in [CHANGELOG.md](CHANGELOG.md), not in `SKILL.md` frontmatter. VS Code validates skill frontmatter for supported discovery fields, and unsupported metadata such as `version` can produce warnings. Keep `SKILL.md` frontmatter focused on fields the agent uses to find and run the skill, such as `name`, `description`, `argument-hint`, and `disable-model-invocation`.
+
+Each public skill follows Semantic Versioning.
 
 - Patch: wording fixes, clarifications, or compatible behavior fixes.
 - Minor: backward-compatible capabilities, gates, templates, or validation improvements.
 - Major: contract changes, removed behavior, renamed outputs, or breaking workflow changes.
 
-When a public skill changes, increase that skill's version before exporting to `agentic-system-kit`.
+When a public skill changes, increase that skill's version in the changelog before exporting to `agentic-system-kit`. The `Current Skill Versions` section in the changelog is the machine-readable release ledger used by the package checks.
 
 ## Install
 
 ```sh
 npx skills add violabg/agentic-system-kit
 ```
-
-## Boundary
-
-These skills help create and maintain agent-system files. They do not modify application code, database schema, runtime configuration, or product tests unless a future repo-local system explicitly adds that behavior after approval.

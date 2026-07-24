@@ -4,8 +4,10 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.2.2`
+- `bootstrap-agentic-system`: `1.3.2`
 - `maintain-agentic-system`: `1.0.0`
+- `create-work-item-planning-skills`: `1.0.0`
+- `create-work-item-from-description`: `1.0.0`
 
 ## 2026-07-24
 
@@ -17,6 +19,26 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 ### `bootstrap-agentic-system` 1.2.2
 
 - Required bootstrap proposals to surface glossary conflicts and ask the user how to resolve them before file-plan approval.
+
+### `bootstrap-agentic-system` 1.3.0
+
+- Added a final post-bootstrap proposal for `create-work-item-planning-skills`, including mandatory safe session persistence for generated bug and user-story planning skills.
+
+### `create-work-item-planning-skills` 1.0.0
+
+- Initial release for generating `plan-bug-from-id` and `plan-user-story-from-id` with tracker or local-Markdown session adapters.
+
+### `bootstrap-agentic-system` 1.3.1
+
+- Clarified that Planner sessions are configured during bootstrap, isolated to the current session, and required for Planner-only ID-based planning skills.
+
+### `bootstrap-agentic-system` 1.3.2
+
+- Split session clarification into explicit questions about storage location, internal versus external placement, and current-session-only access.
+
+### `create-work-item-from-description` 1.0.0
+
+- Initial release for creating tracker-backed or local-Markdown bugs and user stories without creating planning sessions.
 
 ### `bootstrap-agentic-system` 1.2.1
 

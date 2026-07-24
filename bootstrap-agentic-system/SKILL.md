@@ -109,6 +109,9 @@ Ask only questions that materially change the system design:
 - how to resolve glossary conflicts when a proposed term, boundary, role name, artifact name, or workflow concept conflicts with an existing glossary definition
 - whether tracker-backed planning should include optional intake skills for existing user stories and bugs
 - whether tracker-backed workflows should include optional creation skills for new user-story tickets and bug tickets
+- where Planner session folders should be stored
+- whether the session path is internal to the destination repository or external
+- how the generated agents will be restricted to reading only the current session folder
 
 Use bounded options when possible. Do not request file-plan approval while blocking questions remain open.
 
@@ -153,6 +156,18 @@ If repository discovery finds a ticketing or issue-tracking system, also propose
 - creating new bug tickets from QA findings or bug reports
 
 These tracker skills are not mandatory. Recommend them only when they reduce repeated manual intake, preserve tracker metadata, or prevent unclear work from entering planning.
+
+When the target workflow plans from existing bug or user-story IDs, propose the public `create-work-item-planning-skills` skill as the final bootstrap extension. It creates the repository-local `plan-bug-from-id` and `plan-user-story-from-id` skills rather than embedding vendor-specific intake logic in the bootstrap skill.
+
+The proposal must require both generated skills to:
+
+- accept a bug or user-story ID and derive a stable filesystem-safe session ID,
+- create or resume one session folder before evidence gathering,
+- persist source metadata, evidence, decisions, and the implementation plan in that session,
+- use a selected tracker adapter when GitHub, Jira, or another issue system is configured,
+- use a repository-local Markdown adapter when no tracker is configured,
+- make the session path and adapter explicit in the final handoff.
+- invoke the generated planning skills only from the Planner agent; no other agent may invoke them.
 
 ### Gate 4: File-Plan Approval
 
@@ -259,10 +274,12 @@ If the target repository uses a ticketing or issue-tracking system, consider opt
 
 - Plan from existing user-story ticket
 - Plan from existing bug ticket
+- Create `plan-user-story-from-id` and `plan-bug-from-id` through `create-work-item-planning-skills`
+- Create work items through `create-work-item-from-description` when ticket creation is needed
 - Create user-story ticket
 - Create bug ticket
 
-Keep these optional. During bootstrap clarification, ask whether tracker integration belongs in the first install batch, a later batch, or out of scope.
+Keep tracker integration optional, but treat session creation and persistence as mandatory for generated ID-based planning skills. Work-item creation must not create a planning session. During bootstrap clarification, ask whether the generated work-item planning skills belong in the first install batch, a later batch, or out of scope. If selected for a later batch, record `create-work-item-planning-skills` as the final post-bootstrap proposal.
 
 ### Gates Inside Main Agents
 
@@ -314,6 +331,10 @@ When a ticketing or issue-tracking system is present, also evaluate optional tra
 - intake from an existing bug ticket into the Planner's session artifacts
 - creation of a user-story ticket from clarified requirements, acceptance criteria, and scope notes
 - creation of a bug ticket from reproducible behavior, expected behavior, impact, evidence, and affected surface
+
+For ID-based planning, prefer one generator skill, `create-work-item-planning-skills`, that creates both `plan-bug-from-id` and `plan-user-story-from-id` with the same session interface and different evidence gates. Do not generate either skill without the session interface.
+
+Both generated skills must be Planner-only and must never be invoked by other agents.
 
 Do not make tracker skills mandatory. Include them only when the team repeatedly moves work between chat, artifacts, and tickets.
 

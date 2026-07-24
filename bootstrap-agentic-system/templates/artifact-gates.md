@@ -48,7 +48,7 @@ This catalog is a menu, not a fixed contract. Use repository discovery and failu
 | Plan Approval | Prevent unapproved implementation | User | `implementation-plan.md` |
 | Handoff Completeness | Prevent downstream guessing | Sending agent | handoff section or file |
 | Focused Validation | Prove touched behavior first | Implementor or Tester | `changed-files.md`, validation notes |
-| Review Readiness | Ensure reviewer has artifacts and validation | Reviewer | `review-report.md` |
+| Review Readiness | Ensure review has artifacts and validation | Human, PR surface, gate, or dedicated review agent when justified | review notes or `review-report.md` |
 
 For every accepted gate, record why it belongs in this repository. For every high-cost or rejected gate, record why the workflow can proceed without it.
 

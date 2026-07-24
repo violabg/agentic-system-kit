@@ -199,7 +199,8 @@ Create persistent, user-invokable custom agents for role boundaries that change 
 - Planner: clarifies requirements and produces approved artifacts. **Must reference the generated knowledge-index path, `templates/plan-schema.md`, and `templates/question-schema.md` by path in its contract; read the knowledge index before loading knowledge files; produce implementation-plan.md files using the plan schema; and ask blocking clarification questions using the question schema.**
 - Implementor: modifies code only from an approved plan.
 - Tester: creates or runs test strategy for approved work.
-- Reviewer: reviews plan/spec conformance, durable standards, defects, regressions, and gaps.
+
+Review is a required capability, not a mandatory default agent. Add a dedicated reviewer agent only when repository discovery shows that review has its own authority boundary, context boundary, or durable output contract. Otherwise, represent review through gates, validation commands, human review, PR review surfaces, or maintenance checks.
 
 Optional user-invokable agents are useful when the work can happen outside feature planning: Ask, Knowledge Builder, Issue Intake, Visual Intake.
 

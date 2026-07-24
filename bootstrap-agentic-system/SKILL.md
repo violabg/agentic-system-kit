@@ -1,6 +1,6 @@
 ---
 name: bootstrap-agentic-system
-version: "1.0.0"
+version: "1.1.0"
 description: "Use when: bootstrapping a repository-specific coding agentic system with custom agents, gates, hidden subagents, skills, artifacts, handoffs, bounded knowledge loading, or a prompt-to-skill conversion for agent workflows."
 argument-hint: "Target repo, preferred agent platform, and any known workflow risks"
 disable-model-invocation: true
@@ -92,6 +92,7 @@ Completion criterion: you can name the likely platform, tracker/session model, k
 Ask only questions that materially change the system design:
 
 - target agent platform
+- custom agent prefix name, or whether the bootstrap run should propose one
 - output language
 - issue/session system
 - approval owner
@@ -110,15 +111,16 @@ Produce a concise proposal with:
 
 1. costly failure modes
 2. instruction hierarchy
-3. recommended modes
-4. user-invokable main agents
-5. hidden subagents and delegation rules
-6. artifacts and gates
-7. reusable skills or prompts
-8. knowledge map
-9. handoff envelope
-10. file-generation plan
-11. three one-week validation experiments
+3. recommended custom agent prefix, or the requested prefix if already provided
+4. recommended modes
+5. user-invokable main agents
+6. hidden subagents and delegation rules
+7. artifacts and gates
+8. reusable skills or prompts
+9. knowledge map
+10. handoff envelope
+11. file-generation plan
+12. three one-week validation experiments
 
 The knowledge map must include an index-first loading strategy:
 
@@ -141,6 +143,7 @@ These tracker skills are not mandatory. Recommend them only when they reduce rep
 ### Gate 4: File-Plan Approval
 
 Use `templates/bootstrap-file-plan.md`. Mark approval false by default. Do not write files until the user explicitly approves the plan.
+The file plan must record the chosen custom agent prefix and show it in proposed agent file names.
 
 ### Gate 5: Generation
 
@@ -202,6 +205,8 @@ The generated system must have these properties.
 ### Main Agents
 
 Create persistent, user-invokable custom agents for role boundaries that change authority:
+
+- Agent naming: before generation, either ask for a custom agent prefix or propose one derived from repository language. Apply the chosen prefix consistently to generated user-invokable and hidden custom agent names so they do not collide with generic names from other repositories.
 
 - Planner: clarifies requirements and produces approved artifacts. **Must reference the generated knowledge-index path, `templates/plan-schema.md`, and `templates/question-schema.md` by path in its contract; read the knowledge index before loading knowledge files; produce implementation-plan.md files using the plan schema; and ask blocking clarification questions using the question schema.**
 - Implementor: modifies code only from an approved plan.

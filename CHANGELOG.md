@@ -4,7 +4,7 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.1.1`
+- `bootstrap-agentic-system`: `1.2.2`
 - `maintain-agentic-system`: `1.0.0`
 
 ## 2026-07-24
@@ -13,6 +13,18 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 - Moved public skill version tracking from `SKILL.md` frontmatter into this changelog.
 - Expanded the README with skill-selection guidance, usage notes, and the versioning policy.
+
+### `bootstrap-agentic-system` 1.2.2
+
+- Required bootstrap proposals to surface glossary conflicts and ask the user how to resolve them before file-plan approval.
+
+### `bootstrap-agentic-system` 1.2.1
+
+- Required bootstrap proposals and file plans to explicitly offer `CONTEXT.md` creation or edits when stable terms or source-of-truth boundaries need a glossary.
+
+### `bootstrap-agentic-system` 1.2.0
+
+- Added context-glossary guidance so generated systems can use `CONTEXT.md` for stable vocabulary and source-of-truth boundaries without confusing it with knowledge-index loading.
 
 ### `bootstrap-agentic-system` 1.1.1
 

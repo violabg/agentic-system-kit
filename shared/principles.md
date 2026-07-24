@@ -6,6 +6,7 @@ An Agentic System is a repo-local operating system for AI coding work: instructi
 
 - Fit the target repository instead of installing a fixed template.
 - Put approval gates where authority or risk changes.
+- Use a context glossary for stable vocabulary and source-of-truth boundaries.
 - Keep knowledge loading bounded and index-first.
 - Prefer durable role contracts over long general-purpose instructions.
 - Preserve handoffs with explicit artifacts.

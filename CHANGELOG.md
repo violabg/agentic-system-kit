@@ -4,7 +4,7 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.1.0`
+- `bootstrap-agentic-system`: `1.1.1`
 - `maintain-agentic-system`: `1.0.0`
 
 ## 2026-07-24
@@ -13,6 +13,10 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 - Moved public skill version tracking from `SKILL.md` frontmatter into this changelog.
 - Expanded the README with skill-selection guidance, usage notes, and the versioning policy.
+
+### `bootstrap-agentic-system` 1.1.1
+
+- Enforced implementation-plan schema adherence in generated Planner contracts, including linked filesystem-tree paths, File Details anchors, backlinks, and schema-over-lint validation behavior.
 
 ### `bootstrap-agentic-system` 1.1.0
 

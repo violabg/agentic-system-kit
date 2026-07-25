@@ -6,8 +6,19 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 - `bootstrap-agentic-system`: `1.3.2`
 - `maintain-agentic-system`: `1.0.0`
-- `create-work-item-planning-skills`: `1.0.0`
+- `create-work-item-planning-skills`: `1.1.0`
 - `create-work-item-from-description`: `1.0.0`
+
+## 2026-07-25
+
+### Package Layout
+
+- Grouped exported skills under `agentic-system` and `work-items` so installers can offer whole-group selection alongside individual skill selection.
+
+### `create-work-item-planning-skills` 1.1.0
+
+- Added canonical ID-planning gates for bug cause selection and evidence-preserving user-story intake.
+- Required generated planning skills to preserve tracker content as Markdown, save selected bug-cause analysis, and resume the repository planning workflow only after evidence is recorded.
 
 ## 2026-07-24
 

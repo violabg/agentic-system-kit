@@ -6,10 +6,10 @@
 
 - `bootstrap-agentic-system`: choose this when a repository does not yet have a deliberate agent workflow, or when an existing setup is informal enough that it should be redesigned from first principles. The skill inspects workflow evidence, identifies costly failure modes, proposes a repo-specific Agentic System, waits for file-plan approval, then generates approved agents, skills, templates, gates, and validation notes. Use it by naming the target repository, preferred agent platform if known, and any workflow risks you already care about.
 - `maintain-agentic-system`: choose this when a repository already has an Agentic System and the codebase, team workflow, validation commands, or knowledge docs have changed. The skill detects existing agent-system files, checks whether they still match the repo and kit principles, proposes a maintenance plan, waits for approval, applies only approved updates, and validates structure. Use it by naming the repo, the changed workflow or pain point, and the platform you want to keep supporting.
-- `create-work-item-planning-skills`: choose this after bootstrap when the repository needs ID-based bug and user-story planning. It creates both `plan-bug-from-id` and `plan-user-story-from-id` with a shared session-artifact contract and a configurable tracker or local-Markdown adapter.
+- `create-work-item-planning-skills`: choose this after bootstrap when the repository needs ID-based bug and user-story planning. It creates both `plan-bug-from-id` and `plan-user-story-from-id` with a shared session-artifact contract, configurable tracker or local-Markdown adapter, bug cause-selection gate, and evidence-preserving user-story intake.
 - `create-work-item-from-description`: choose this when a user wants to create a bug or user story through a configured tracker/MCP adapter or as a local Markdown record. It returns an ID and never creates a planning session.
 
-Both skills are intentionally scoped to agent-system files: instructions, agents, skills, prompts, governance docs, knowledge docs, artifact templates, and session workflows. They do not modify application code, database schema, runtime configuration, or product tests unless a future repo-local system explicitly adds that behavior after approval.
+All public skills are intentionally scoped to agent-system files: instructions, agents, skills, prompts, governance docs, knowledge docs, artifact templates, and session workflows. They do not modify application code, database schema, runtime configuration, or product tests unless a future repo-local system explicitly adds that behavior after approval.
 
 ## Which Skill Should I Pick?
 
@@ -34,3 +34,5 @@ When a public skill changes, increase that skill's version in the changelog befo
 ```sh
 npx skills add violabg/agentic-system-kit
 ```
+
+The published package is grouped under `agentic-system` and `work-items`, so the installer can offer whole-group selection as well as one-by-one skill selection.

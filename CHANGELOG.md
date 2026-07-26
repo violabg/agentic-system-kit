@@ -4,8 +4,8 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.5.0`
-- `maintain-agentic-system`: `1.1.0`
+- `bootstrap-agentic-system`: `1.8.0`
+- `maintain-agentic-system`: `1.3.0`
 - `create-work-item-planning-skills`: `1.1.0`
 - `create-work-item-from-description`: `1.0.0`
 
@@ -17,6 +17,29 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 - Added `skills.sh.json` to group the repository page on skills.sh while leaving CLI install behavior to the upstream `skills` tool.
 
 ## 2026-07-26
+
+### `bootstrap-agentic-system` 1.8.0
+
+- Added generated-system blueprint and role-contract templates so Bootstrap can install Planner, Implementor, Tester, Knowledge Builder, Vision, Ask, and hidden auditor contracts with stronger public-safe structure.
+- Required Bootstrap proposals and generated files to use the blueprint and role-specific templates, including first-install batch decisions, role boundaries, numbered gates, artifacts, validation, and handoff obligations.
+
+### `bootstrap-agentic-system` 1.7.0
+
+- Added mandatory visual-artifact clarification during bootstrap discovery and proposal.
+- Required a Vision agent or visual-intake skill when screenshots, mockups, diagrams, UI snapshots, image assets, or image-based QA evidence materially affect the workflow.
+
+### `maintain-agentic-system` 1.3.0
+
+- Added maintenance checks for missing visual-artifact decisions and Vision agent coverage in existing systems.
+
+### `bootstrap-agentic-system` 1.6.0
+
+- Clarified that generated `CONTEXT.md` files must be primarily about repository code/domain vocabulary, with agent-system terms only as a separated secondary section when needed.
+- Required generated systems to include root `AGENTS.md` by default, or an approved platform-equivalent root instruction file.
+
+### `maintain-agentic-system` 1.2.0
+
+- Added maintenance checks for root instruction coverage and repo-code-focused context glossaries to keep existing systems aligned with Bootstrap 1.6.0.
 
 ### `maintain-agentic-system` 1.1.0
 

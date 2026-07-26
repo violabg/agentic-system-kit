@@ -13,7 +13,15 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ### Package Layout
 
-- Grouped exported skills under `agentic-system` and `work-items` so installers can offer whole-group selection alongside individual skill selection.
+- Grouped exported skills under `agentic-system` and `work-items` to keep the public package organized as a catalog-style skills repository.
+- Added `skills.sh.json` to group the repository page on skills.sh while leaving CLI install behavior to the upstream `skills` tool.
+
+## 2026-07-26
+
+### Package Layout
+
+- Moved the source package itself to the same nested `skills/<group>/<skill>` layout used by the exported repo so `npx skills add` can offer one-click group selection as well as per-skill selection.
+- Updated the public export, publish, and version-check scripts to discover grouped skills recursively instead of assuming a flat `public-package/skills/*` layout.
 
 ### `create-work-item-planning-skills` 1.1.0
 

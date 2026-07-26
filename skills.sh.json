@@ -1,0 +1,22 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Agentic System",
+      "description": "Bootstrap and maintain repository-local agent workflows.",
+      "skills": [
+        "bootstrap-agentic-system",
+        "maintain-agentic-system"
+      ]
+    },
+    {
+      "title": "Work Items",
+      "description": "Create and plan tracker-backed or local work items.",
+      "skills": [
+        "create-work-item-from-description",
+        "create-work-item-planning-skills"
+      ]
+    }
+  ]
+}

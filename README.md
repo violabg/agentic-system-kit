@@ -35,4 +35,10 @@ When a public skill changes, increase that skill's version in the changelog befo
 npx skills add violabg/agentic-system-kit
 ```
 
-The published package is grouped under `agentic-system` and `work-items`, so the installer can offer whole-group selection as well as one-by-one skill selection.
+The package keeps skills under grouped paths such as `skills/agentic-system/bootstrap-agentic-system` and `skills/work-items/create-work-item-from-description`.
+
+That grouped directory layout lets `npx skills add` offer a parent group choice for installing a whole set at once while still allowing users to expand the group and select individual skills one by one.
+
+Prompted selection during `npx skills add` is still controlled by the `skills` CLI and the environment where it runs. If the CLI detects a host agent session, it may switch to non-interactive installation and install all discovered skills automatically.
+
+If you want explicit selection today, use CLI flags such as `--list`, `--skill`, and `--agent`, or run the command from a normal shell outside an auto-detected agent session.

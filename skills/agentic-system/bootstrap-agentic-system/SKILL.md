@@ -13,6 +13,8 @@ Use this skill to design and optionally install a custom coding agentic system f
 
 Create a small, durable agentic workflow that prevents the repository's likely costly failures. The output system should include persistent custom agents, explicit gates, bounded hidden subagents, reusable skills or prompts, session artifacts, handoff contracts, a context-glossary strategy, and a knowledge-loading strategy.
 
+The generated system must include a Knowledge Builder agent. It is not optional: bootstrap proposals and file plans must create it in the first generated agent batch unless the user explicitly stops the bootstrap before generation.
+
 ## Bootstrap Boundary
 
 - Do not modify application code, database schema, migrations, runtime config, or product tests.
@@ -21,6 +23,15 @@ Create a small, durable agentic workflow that prevents the repository's likely c
 - Separate bootstrap behavior from generated-system behavior. A rule for the future Planner is not automatically a rule for this bootstrap run.
 - Keep repository-specific recommendations separate from transferable principles.
 - Do not create a `CONTEXT.md` just because it is missing. Create or update a context glossary only when stable terms, source-of-truth boundaries, or role/artifact names have been resolved and need to persist.
+
+## Bootstrap Execution Subagents
+
+For non-trivial repositories, use two bounded hidden subagents during bootstrap when the agent platform supports subagent delegation:
+
+- Repository Workflow Scout: read-only discovery of agent platform signals, tracker/session model, knowledge sources, glossary terms, validation commands, and likely workflow risks.
+- Contract Auditor: read-only comparison of the user's bootstrap request, this skill's required gates, selected templates, and the proposed or generated files.
+
+Run these subagents in parallel when the platform supports parallel delegation. Keep both subagents read-only, give each a narrow input contract and evidence budget, and require compact findings with file paths, inferred facts, unknowns, and risks. Do not let subagents ask the user directly or write files. If subagents are unavailable, perform the same scout and auditor checks inline and report that delegation could not run.
 
 ## Required Reference Loads
 
@@ -113,6 +124,8 @@ Ask only questions that materially change the system design:
 - whether the session path is internal to the destination repository or external
 - how the generated agents will be restricted to reading only the current session folder
 
+Always run a context-glossary intake before proposing files: scan repo wording from `CONTEXT.md`, README files, docs, contribution guides, tracker labels, package names, role names, artifact names, and workflow terms; summarize the inferred vocabulary; then ask the user to confirm, correct, or fill missing source-of-truth terms. If stable terms or boundaries cannot be inferred, propose candidate terms and ask bounded questions instead of silently skipping the glossary decision.
+
 Use bounded options when possible. Do not request file-plan approval while blocking questions remain open.
 
 ### Gate 3: System Proposal
@@ -132,6 +145,7 @@ Produce a concise proposal with:
 11. handoff envelope
 12. file-generation plan
 13. three one-week validation experiments
+14. post-bootstrap recommendations
 
 The context glossary rule must explicitly tell the user whether stable terms, source-of-truth boundaries, role names, artifact names, or workflow concepts need a glossary. If they do, propose creating or editing `CONTEXT.md` or the target repo's equivalent in the file-generation plan. If they do not, state that no glossary edit is proposed and why.
 
@@ -168,6 +182,8 @@ The proposal must require both generated skills to:
 - use a repository-local Markdown adapter when no tracker is configured,
 - make the session path and adapter explicit in the final handoff.
 - invoke the generated planning skills only from the Planner agent; no other agent may invoke them.
+
+The post-bootstrap recommendations section is always required. It must recommend running the generated Knowledge Builder agent to scan the repository, create or refine the knowledge index, suggest context-glossary terms from repository wording, and ask bounded questions for knowledge areas that cannot be inferred. It must also recommend the public `create-work-item-planning-skills` skill for creating repository-local `plan-bug-from-id` and `plan-user-story-from-id` skills, and the public `create-work-item-from-description` skill when the team creates new user-story or bug tickets from clarified work.
 
 ### Gate 4: File-Plan Approval
 
@@ -252,6 +268,23 @@ Validate frontmatter, markdown diagnostics, and internal links where tooling is 
 - If the template exists but was not created by this bootstrap run, confirm it contains equivalent structure to the source template.
 - Report the file path and validation status in the final response.
 
+**Final Bootstrap Contract Validation:**
+
+Before final response, compare the approved file plan, the user's stated requirements, this skill's required outputs, and the generated files. Treat missing required contract elements as blocking validation failures unless the user explicitly approved their omission.
+
+Required final checks:
+
+- Every approved file operation was completed, skipped with an approved reason, or reported as blocked.
+- Required generated agents exist, including Planner, Implementor, Tester, and Knowledge Builder.
+- The generated Knowledge Builder contract requires repository scanning, knowledge-index creation or refinement, context-glossary term suggestions, and bounded questions for missing knowledge areas.
+- The generated Planner contract references the context-glossary path when one exists, the knowledge-index path, `templates/plan-schema.md`, and `templates/question-schema.md` by explicit path.
+- The generated Planner contract forbids bulk-loading repository knowledge before index selection.
+- The context-glossary decision from the file plan is reflected in generated files or recorded as an intentional no-op.
+- Post-bootstrap recommendations include running Knowledge Builder, `create-work-item-planning-skills`, and `create-work-item-from-description`.
+- Validation commands from the proposal were run where available, or each skipped command has a reason.
+
+If the Contract Auditor subagent is available, run it after generation with the final file list and require it to report pass/fail for these checks. If not, run the checklist inline.
+
 ## Generated System Requirements
 
 The generated system must have these properties.
@@ -265,10 +298,11 @@ Create persistent, user-invokable custom agents for role boundaries that change 
 - Planner: clarifies requirements and produces approved artifacts. **Must reference the generated context-glossary path when one exists, the generated knowledge-index path, `templates/plan-schema.md`, and `templates/question-schema.md` by path in its contract; read the context glossary for naming and boundaries before defining roles, gates, artifacts, or skills; read the knowledge index before loading knowledge files; produce implementation-plan.md files using the plan schema; preserve schema-required links, anchors, and backlinks even when markdown diagnostics object; and ask blocking clarification questions using the question schema.**
 - Implementor: modifies code only from an approved plan.
 - Tester: creates or runs test strategy for approved work.
+- Knowledge Builder: scans repository knowledge surfaces, proposes or updates the knowledge index, extracts stable vocabulary candidates for the context glossary, and asks bounded questions when the repo does not reveal what knowledge is needed. **Must be generated in the first agent batch. Must keep `CONTEXT.md` or the repo glossary separate from the knowledge index. Must recommend concrete knowledge entries with `When to read` triggers rather than bulk-loading docs.**
 
 Review is a required capability, not a mandatory default agent. Add a dedicated reviewer agent only when repository discovery shows that review has its own authority boundary, context boundary, or durable output contract. Otherwise, represent review through gates, validation commands, human review, PR review surfaces, or maintenance checks.
 
-Optional user-invokable agents are useful when the work can happen outside feature planning: Ask, Knowledge Builder, Issue Intake, Visual Intake.
+Optional user-invokable agents are useful when the work can happen outside feature planning and does not duplicate the required agents: Ask, Issue Intake, Visual Intake.
 
 If the target repository uses a ticketing or issue-tracking system, consider optional user-invokable skills or prompts instead of main agents when the workflow is repeatable but narrow:
 
@@ -279,7 +313,7 @@ If the target repository uses a ticketing or issue-tracking system, consider opt
 - Create user-story ticket
 - Create bug ticket
 
-Keep tracker integration optional, but treat session creation and persistence as mandatory for generated ID-based planning skills. Work-item creation must not create a planning session. During bootstrap clarification, ask whether the generated work-item planning skills belong in the first install batch, a later batch, or out of scope. If selected for a later batch, record `create-work-item-planning-skills` as the final post-bootstrap proposal.
+Keep tracker integration optional, but treat session creation and persistence as mandatory for generated ID-based planning skills. Work-item creation must not create a planning session. During bootstrap clarification, ask whether the generated work-item planning skills belong in the first install batch, a later batch, or out of scope. Always record `create-work-item-planning-skills` and `create-work-item-from-description` in the final post-bootstrap recommendations, even when they are not selected for the current file batch.
 
 ### Gates Inside Main Agents
 
@@ -360,3 +394,9 @@ Generated planners must load knowledge deliberately:
 Before writing files, end with the unapproved file plan and ask for explicit approval.
 
 After writing files, report changed files, validations, and remaining risks.
+
+Always include post-bootstrap recommendations after generation:
+
+- Run the generated Knowledge Builder agent to scan the repository, build or refine the knowledge index, propose glossary updates from repository wording, and ask the user for missing knowledge boundaries.
+- Run `create-work-item-planning-skills` when the team wants `plan-bug-from-id` and `plan-user-story-from-id` skills.
+- Run `create-work-item-from-description` when the team wants repeatable creation of user-story or bug tickets from clarified work.

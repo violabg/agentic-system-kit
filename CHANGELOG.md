@@ -4,21 +4,38 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.3.2`
-- `maintain-agentic-system`: `1.0.0`
+- `bootstrap-agentic-system`: `1.5.0`
+- `maintain-agentic-system`: `1.1.0`
 - `create-work-item-planning-skills`: `1.1.0`
 - `create-work-item-from-description`: `1.0.0`
 
 ## 2026-07-25
 
-### Package Layout
+### Initial Package Layout
 
 - Grouped exported skills under `agentic-system` and `work-items` to keep the public package organized as a catalog-style skills repository.
 - Added `skills.sh.json` to group the repository page on skills.sh while leaving CLI install behavior to the upstream `skills` tool.
 
 ## 2026-07-26
 
-### Package Layout
+### `maintain-agentic-system` 1.1.0
+
+- Aligned maintenance audits with the current Bootstrap contract, including mandatory Knowledge Builder coverage, context-glossary discipline, Planner path references, and index-first knowledge loading.
+- Added bounded maintenance scout and contract-auditor subagents when supported by the agent platform.
+- Added final maintenance contract validation before handoff.
+
+### `bootstrap-agentic-system` 1.5.0
+
+- Added bounded bootstrap execution subagents for repository workflow discovery and contract auditing when supported by the agent platform.
+- Added final bootstrap contract validation to compare generated files against the approved file plan, user requirements, and required skill outputs before final response.
+
+### `bootstrap-agentic-system` 1.4.0
+
+- Made the generated Knowledge Builder agent mandatory in the first bootstrap agent batch.
+- Required stronger context-glossary intake from repository wording before file-plan approval.
+- Added mandatory post-bootstrap recommendations to run Knowledge Builder and propose work-item planning and creation skills.
+
+### Package Layout Export
 
 - Moved the source package itself to the same nested `skills/<group>/<skill>` layout used by the exported repo so `npx skills add` can offer one-click group selection as well as per-skill selection.
 - Updated the public export, publish, and version-check scripts to discover grouped skills recursively instead of assuming a flat `public-package/skills/*` layout.

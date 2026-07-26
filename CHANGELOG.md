@@ -22,6 +22,11 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 - Moved the source package itself to the same nested `skills/<group>/<skill>` layout used by the exported repo so `npx skills add` can offer one-click group selection as well as per-skill selection.
 - Updated the public export, publish, and version-check scripts to discover grouped skills recursively instead of assuming a flat `public-package/skills/*` layout.
+- Preserved folder-level metadata files inside `skills/` during export so grouped category docs can ship to the published repo instead of being dropped.
+
+### Group Metadata
+
+- Added category `README.md` files under grouped skill folders structure more closely for installer discovery.
 
 ### `create-work-item-planning-skills` 1.1.0
 

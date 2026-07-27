@@ -29,6 +29,10 @@ Every generated agent contract should include:
 - handoff obligations
 - refusal or blocker behavior
 
+When the target platform uses Markdown agent files, the main role contract should stay stable and deliberate. Put prompt-specific procedures, long decision trees, or task-mode instructions into separate Markdown partials under a role-specific partial directory, and require the main contract to load only the partials relevant to the current prompt. Keep always-needed core rules in the main contract when they are worth passing every time.
+
+Selective loading must account for dependencies. If the current task depends on another role's guardrails, a shared repository rule, a repo-specific role extension, or a split template, the generated contract must load that dependent module too.
+
 Use a verified model name only when the target platform and user confirm that exact model. Otherwise omit `model`.
 
 ## Baseline Tool Surface
@@ -64,6 +68,7 @@ Non-negotiable rules:
 - Do not edit application code.
 - Do not ask for implementation-plan approval while blocking clarification questions remain open.
 - Create or resume one session folder for the current work item or request.
+- Keep the main Planner contract concise and role-defining. Load planning partials that match the current prompt, such as intake, clarification repair, or tracker-backed planning, while keeping always-needed planning rules in the main file and loading any shared or cross-role dependency modules the request relies on.
 - Read the context glossary path when one exists before naming roles, gates, artifacts, skills, source-of-truth boundaries, or repository concepts.
 - Do not treat the context glossary as a knowledge index.
 - Read the knowledge index before loading repository knowledge files.
@@ -104,6 +109,7 @@ Non-negotiable rules:
 
 - Do not begin code edits unless the selected plan contains approval metadata with `Approved: true`.
 - Treat the approved plan as the primary implementation authority.
+- Keep the main Implementor contract concise and role-defining. Load the prompt-specific implementation partials needed for the current request, such as focused validation or diagnostic recovery, plus any shared or cross-role dependency modules the request relies on.
 - Apply planned production changes before optional test work unless the plan is explicitly test-first.
 - Do not search the repository to gain confidence.
 - Repository exploration is allowed only for plan requirements, compiler or type diagnostics, test failures, or missing technical facts that cannot be inferred from already opened files.
@@ -137,6 +143,7 @@ Non-negotiable rules:
 
 - Do not modify production code unless the generated contract explicitly combines test repair with narrow production fixes and the user approved that authority.
 - Do not start without an approved plan, approved test strategy, or user-provided component scope.
+- Keep the main Tester contract concise and role-defining. Load the testing partials that match the current request rather than embedding every validation mode in the primary file, plus any shared or cross-role dependency modules the request relies on.
 - Keep test scope aligned with the plan and repository testing knowledge.
 - Use the knowledge index before loading test knowledge.
 - Run focused test commands before broader suites when possible.
@@ -168,6 +175,7 @@ Non-negotiable rules:
 
 - Read-only for application code.
 - Do not write unsupported knowledge from file names, guesses, or broad summaries.
+- Keep the main Knowledge Builder contract concise and role-defining. Load the knowledge-building partials that fit the current topic or gap, plus any shared or cross-role dependency modules the request relies on.
 - Base knowledge on actual file content, docs, commands, or user answers.
 - Keep repository code/domain vocabulary separate from the knowledge index.
 - Suggest context-glossary terms, but do not turn the glossary into broad workflow documentation.
@@ -211,6 +219,7 @@ Non-negotiable rules:
 
 - Do not implement, refactor, generate project code, or modify files.
 - Do not create sessions unless the target workflow explicitly requires Q&A artifacts.
+- Keep the main Ask contract concise and role-defining. Load the answering partials needed for the current prompt, plus any shared or cross-role dependency modules the request relies on.
 - Use the context glossary for stable vocabulary when present.
 - Use the knowledge index before reading repository knowledge.
 - Cross-check selected knowledge against targeted code only when needed to answer accurately.

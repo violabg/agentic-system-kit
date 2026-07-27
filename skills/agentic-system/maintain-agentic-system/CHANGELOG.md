@@ -4,9 +4,18 @@ Install-safe release history for the `maintain-agentic-system` skill. Maintainer
 
 ## Current Version
 
-- `1.6.1`
+- `1.7.1`
 
 ## 2026-07-27
+
+### 1.7.1
+
+- Required Maintainer to verify that modularization does not drop always-loaded guidance, cross-role dependency modules, or repo-specific role extensions.
+
+### 1.7.0
+
+- Forbade Maintainer from scanning, enumerating, reading, or editing session-folder contents during maintenance.
+- Added maintenance checks for thin main Markdown agent contracts plus prompt-scoped partials when the platform uses modular agent files.
 
 ### 1.6.1
 

@@ -56,9 +56,14 @@ Minimum sections:
 
 - Skills:
 - Templates:
+- Agent partials:
 ```
 
 Keep this file short. It should route agents to the right generated contracts, glossary, knowledge index, templates, and validation commands without duplicating full agent instructions.
+
+When the target platform uses Markdown agent contracts, keep each main generated agent file as a stable routing contract. Put prompt-specific procedures, long checklists, or mode-specific instructions into separate Markdown partials and have the main contract name when those partials should be loaded. Do not generate one monolithic agent file that is always loaded regardless of request type, but do keep always-needed core rules in the main contract when they are worth carrying on every request.
+
+If a request depends on another role's contract fragment, a shared repository rule, or a repo-specific operating mode, the main contract must say to load that dependency partial as well. Selective loading is for relevance and token control, not for hiding important constraints.
 
 ## Vision Agent Shape
 
@@ -129,6 +134,7 @@ Convert a requirement into durable planning artifacts that can be approved befor
 
 - Do not implement application code.
 - Work from a named session artifact package.
+- Keep this main contract role-scoped and concise. Load only the prompt-specific partials that match the current request instead of embedding all optional procedures here, but retain always-needed core rules in the main file and load shared or cross-role dependency partials when the request depends on them.
 - Do not ask for approval while blocking clarification questions remain open.
 - If the repository has a context glossary such as `CONTEXT.md`, read it for stable repository code/domain vocabulary before naming roles, gates, artifacts, skills, or source-of-truth boundaries.
 - Do not treat the context glossary as a knowledge index or as permission to bulk-load repository docs.

@@ -4,9 +4,31 @@ Install-safe release history for the `bootstrap-agentic-system` skill. Bootstrap
 
 ## Current Version
 
-- `1.13.1`
+- `1.16.0`
 
 ## 2026-07-27
+
+### 1.16.0
+
+- Added inline and block Personalization Slot syntax for repo-dependent template assumptions.
+- Added allowlisted Personalization Slots to canonical agent and skill mirrors while preserving non-slot canonical wording.
+- Updated mirror validation to accept approved inline placeholders and non-nested block slots while rejecting unknown or malformed slot markers.
+
+### 1.15.0
+
+- Added Canonical Template Mirrors for generated agents and skills, requiring Bootstrap to preserve non-slot canonical wording while filling only approved personalization slots.
+- Changed Bootstrap generation to use staged batch approvals for Core System, Vision Evidence, Knowledge Builder Bootstrap, Skill Template Generation, and Contract Audit.
+- Required Bootstrap to present the full canonical skill template inventory and record each skill as generated, skipped, or deferred.
+
+### 1.14.1
+
+- Refined modular agent generation so always-needed core guidance can remain in the main role contract when warranted.
+- Required generated agents to load shared or cross-role dependency partials and repo-specific role extensions when the current prompt depends on them.
+
+### 1.14.0
+
+- Required Bootstrap to generate thin main Markdown agent contracts plus prompt-scoped partial instruction files, so generated systems load only the instruction fragments relevant to the current prompt.
+- Added file-plan, blueprint, and validation requirements for modular agent instruction loading.
 
 ### 1.13.1
 

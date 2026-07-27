@@ -4,12 +4,43 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.13.1`
-- `maintain-agentic-system`: `1.6.1`
+- `bootstrap-agentic-system`: `1.16.0`
+- `maintain-agentic-system`: `1.7.1`
 - `create-work-item-planning-skills`: `1.3.1`
 - `create-work-item-from-description`: `1.0.0`
 
 ## 2026-07-27
+
+### `bootstrap-agentic-system` 1.16.0
+
+- Added inline and block Personalization Slot syntax for repo-dependent template assumptions.
+- Added allowlisted Personalization Slots to canonical agent and skill mirrors while preserving non-slot canonical wording.
+- Updated mirror validation to accept approved inline placeholders and non-nested block slots while rejecting unknown or malformed slot markers.
+
+### `bootstrap-agentic-system` 1.15.0
+
+- Added Canonical Template Mirrors for generated agents and skills, requiring Bootstrap to preserve non-slot canonical wording while filling only approved personalization slots.
+- Changed Bootstrap generation to use staged batch approvals for Core System, Vision Evidence, Knowledge Builder Bootstrap, Skill Template Generation, and Contract Audit.
+- Required Bootstrap to present the full canonical skill template inventory and record each skill as generated, skipped, or deferred.
+
+### `bootstrap-agentic-system` 1.14.1
+
+- Refined modular agent generation so always-needed core guidance can remain in the main role contract when warranted.
+- Required generated agents to load shared or cross-role dependency partials and repo-specific role extensions when the current prompt depends on them.
+
+### `maintain-agentic-system` 1.7.1
+
+- Required Maintainer to verify that modularization does not drop always-loaded guidance, cross-role dependency modules, or repo-specific role extensions.
+
+### `bootstrap-agentic-system` 1.14.0
+
+- Required Bootstrap to generate thin main Markdown agent contracts plus prompt-scoped partial instruction files, so generated systems load only the instruction fragments relevant to the current prompt.
+- Added file-plan, blueprint, and validation requirements for modular agent instruction loading.
+
+### `maintain-agentic-system` 1.7.0
+
+- Forbade Maintainer from scanning, enumerating, reading, or editing session-folder contents during maintenance.
+- Added maintenance checks for thin main Markdown agent contracts plus prompt-scoped partials when the platform uses modular agent files.
 
 ### `bootstrap-agentic-system` 1.13.1
 

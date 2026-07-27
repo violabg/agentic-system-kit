@@ -6,6 +6,13 @@ disable-model-invocation: true
 
 # User Story Analysis
 
+<!-- CANONICAL-TEMPLATE-SLOT: REPOSITORY_SEARCH_TOOL START -->
+Use `{{REPOSITORY_SEARCH_TOOL}}` for codebase discovery when analysis requires repository evidence.
+<!-- CANONICAL-TEMPLATE-SLOT: REPOSITORY_SEARCH_TOOL END -->
+<!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE START -->
+Read relevant project knowledge through `{{KNOWLEDGE_SOURCE}}` before analysis when repository knowledge is available.
+<!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE END -->
+
 Act as a **senior Business Analyst and experienced Product Owner**.
 
 Your task is to critically analyze the following **user story** in order to identify:
@@ -25,7 +32,6 @@ If not provided, prompt the user to input the work item id.
 Then, retrieve the user story details from the work item system including description, acceptance criteria, related user stories, and comments in discussion.
 use the provided tools for work item access and retrieval.
 <!-- CANONICAL-TEMPLATE-SLOT: WORK_ITEM_RETRIEVAL END -->
-
 ---
 
 ### Analysis Objectives

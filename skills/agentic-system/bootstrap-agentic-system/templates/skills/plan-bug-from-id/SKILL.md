@@ -6,6 +6,19 @@ disable-model-invocation: true
 
 # Plan Bug From Id
 
+<!-- CANONICAL-TEMPLATE-SLOT: WORK_ITEM_ID_FORMAT START -->
+Accept work item identifiers that match `{{WORK_ITEM_ID_FORMAT}}`.
+<!-- CANONICAL-TEMPLATE-SLOT: WORK_ITEM_ID_FORMAT END -->
+<!-- CANONICAL-TEMPLATE-SLOT: LOCAL_MARKDOWN_TRACKER_CONTRACT START -->
+When no external tracker is configured, use the local Markdown tracker contract `{{LOCAL_MARKDOWN_TRACKER_CONTRACT}}`.
+<!-- CANONICAL-TEMPLATE-SLOT: LOCAL_MARKDOWN_TRACKER_CONTRACT END -->
+<!-- CANONICAL-TEMPLATE-SLOT: TRACKER_ADAPTER START -->
+Tracker access must use `{{TRACKER_ADAPTER}}` when an external work item integration is configured.
+<!-- CANONICAL-TEMPLATE-SLOT: TRACKER_ADAPTER END -->
+<!-- CANONICAL-TEMPLATE-SLOT: APPROVED_MCP_TOOLS START -->
+Custom agent tool access set: {{APPROVED_MCP_TOOLS}}
+<!-- CANONICAL-TEMPLATE-SLOT: APPROVED_MCP_TOOLS END -->
+
 You need to plan a bug resolution based on the bug work item ID provided by the user.
 If the user doesn't provide an bug work item ID, ask for it.
 
@@ -44,7 +57,6 @@ then tell me the name of the artifact you created, so I can read it and create t
 <!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE START -->
 Based on the information you have gathered about the bug, pull all the related knowledge from the knowledge catalog. This includes both MustHave as well PerContext and PerComponent knowledge. Make sure to pull all the relevant information that can help you understand the bug and its context better.
 <!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE END -->
-
 # Narrow to wide cause identification
 
 Analyze the bug information you have gathered.
@@ -86,7 +98,6 @@ Please select which cause you want to address in the plan.
 <!-- CANONICAL-TEMPLATE-SLOT: SESSION_ARTIFACT_STORAGE START -->
 After the user selects the cause they want to address in the plan, save the analysis of that cause in a session artifact named `bug_<WORK_ITEM_BUG_ID>_cause_analysis`. This artifact should contain all the detailed information about the selected cause, including the explanation, files/components involved, and any external dependencies. This will be used in the next step for the plan creation.
 <!-- CANONICAL-TEMPLATE-SLOT: SESSION_ARTIFACT_STORAGE END -->
-
 **RULES FOR BUG FIX PLANNING**
 
 - Produce a single step plan. Event if the fix is complex, try to abstract it into a single step that can be executed and tested independently.

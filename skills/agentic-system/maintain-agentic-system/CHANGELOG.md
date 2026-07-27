@@ -4,9 +4,14 @@ Install-safe release history for the `maintain-agentic-system` skill. Maintainer
 
 ## Current Version
 
-- `1.7.1`
+- `1.8.0`
 
 ## 2026-07-27
+
+### 1.8.0
+
+- Added explicit upstream, schema, template, and changelog reconciliation for systems created from the rewritten Bootstrap source model.
+- Required Maintainer to classify each Bootstrap contract delta as applied, not applicable, deferred, superseded, unknown, or requiring update using manifest records, changelog snapshots, current installed changelogs, and direct repository evidence.
 
 ### 1.7.1
 

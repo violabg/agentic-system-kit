@@ -6,6 +6,19 @@ disable-model-invocation: true
 
 # Plan User Story From Id
 
+<!-- CANONICAL-TEMPLATE-SLOT: WORK_ITEM_ID_FORMAT START -->
+Accept work item identifiers that match `{{WORK_ITEM_ID_FORMAT}}`.
+<!-- CANONICAL-TEMPLATE-SLOT: WORK_ITEM_ID_FORMAT END -->
+<!-- CANONICAL-TEMPLATE-SLOT: LOCAL_MARKDOWN_TRACKER_CONTRACT START -->
+When no external tracker is configured, use the local Markdown tracker contract `{{LOCAL_MARKDOWN_TRACKER_CONTRACT}}`.
+<!-- CANONICAL-TEMPLATE-SLOT: LOCAL_MARKDOWN_TRACKER_CONTRACT END -->
+<!-- CANONICAL-TEMPLATE-SLOT: TRACKER_ADAPTER START -->
+Tracker access must use `{{TRACKER_ADAPTER}}` when an external work item integration is configured.
+<!-- CANONICAL-TEMPLATE-SLOT: TRACKER_ADAPTER END -->
+<!-- CANONICAL-TEMPLATE-SLOT: APPROVED_MCP_TOOLS START -->
+Custom agent tool access set: {{APPROVED_MCP_TOOLS}}
+<!-- CANONICAL-TEMPLATE-SLOT: APPROVED_MCP_TOOLS END -->
+
 You need to plan an implamentation based the on the work item id provided by the user.
 If user don't provide an work item id, ask for it.
 

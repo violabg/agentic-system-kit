@@ -6,6 +6,16 @@ disable-model-invocation: true
 
 # Integration Test Knowledge Checklist
 
+<!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE START -->
+Read relevant integration-test knowledge through `{{KNOWLEDGE_SOURCE}}` before drafting project-specific test guidance.
+<!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE END -->
+<!-- CANONICAL-TEMPLATE-SLOT: INTEGRATION_TEST_SCOPE START -->
+Document the integration-test scope and out-of-scope boundaries: `{{INTEGRATION_TEST_SCOPE}}`.
+<!-- CANONICAL-TEMPLATE-SLOT: INTEGRATION_TEST_SCOPE END -->
+<!-- CANONICAL-TEMPLATE-SLOT: VALIDATION_COMMANDS START -->
+Document the target repository validation commands: `{{VALIDATION_COMMANDS}}`.
+<!-- CANONICAL-TEMPLATE-SLOT: VALIDATION_COMMANDS END -->
+
 # Integration Test Knowledge Checklist for Integration Tester
 
 Use this checklist to generate a project-specific integration-test knowledge for Integration Tester.
@@ -45,7 +55,6 @@ intent: When an agent needs to create, modify, or debug integration tests for th
 ---
 ```
 <!-- CANONICAL-TEMPLATE-SLOT: TEST_STACK_CONVENTIONS END -->
-
 ## Project Test Stack
 
 - The knowledge names the test framework.

@@ -35,7 +35,7 @@ Use this before creating or modifying agent-system files.
 
 | Batch | Approval Status | Proposed Files | Blocking Decisions | Validation |
 | --- | --- | --- | --- | --- |
-| Core System | pending | root instructions, glossary if needed, manifest, changelog snapshot, knowledge-index shell, templates, Planner, Implementor, Tester, Knowledge Builder, Ask if selected | platform, prefix, root instructions, tool decisions, glossary decisions | root/template/frontmatter checks |
+| Core System | pending | root instructions, glossary if needed, manifest, changelog snapshot, knowledge-index shell, repo-local schema files, templates, Planner, Implementor, Tester, Knowledge Builder, Ask if selected | platform, prefix, root instructions, tool decisions, glossary decisions, schema paths | root/template/frontmatter/schema checks |
 | Vision Evidence | selected | Vision agent or visual-intake skill | visual support option, relevant visual assets, artifact format | visual artifact support check |
 | Knowledge Builder Bootstrap | pending | knowledge index updates and knowledge files | knowledge gaps, authority boundaries, source evidence | knowledge-index checks |
 | Skill Template Generation | pending | selected repo-local skills | generated/skipped/deferred choices, tracker/session adapter | skill mirror and adapter checks |
@@ -73,6 +73,10 @@ Use this before creating or modifying agent-system files.
 - Entrypoints To Reference:
 - Context Glossary Path To Reference:
 - Knowledge Index Path To Reference:
+- Implementation Plan Schema Path To Reference:
+- Clarification Question Schema Path To Reference:
+- Manifest Path To Reference:
+- Prompt-Sensitive Routing Rule: route the current request to relevant agents, skills, schemas, knowledge-index entries, glossary, partials, and validation commands without bulk-loading repository facts or full role contracts
 
 ## Agent Instruction Structure
 
@@ -114,6 +118,15 @@ Use this before creating or modifying agent-system files.
 | `templates/skills/user-story-analysis/SKILL.md` | ask user | undecided | work item adapter, stakeholder terminology | deferred |
 | `templates/skills/business-logic-gap-detector/SKILL.md` | ask user | undecided | knowledge paths, validation commands, repository search tools | deferred |
 | `templates/skills/integration-test-knowledge-checklist/SKILL.md` | ask user | undecided | test knowledge paths, validation commands | deferred |
+
+## Runtime Schemas
+
+| Source Schema | Generated Path | Operation | Required Preservation | Planner Reference | Approval Status |
+| --- | --- | --- | --- | --- | --- |
+| `templates/plan-schema.md` | `<template-dir>/plan-schema.md` | NEW | filesystem-tree links, File Details anchors, backlinks, approval metadata, operations, validation commands, risks and rollback | required | pending |
+| `templates/question-schema.md` | `<template-dir>/question-schema.md` | NEW | blocking rule, question register, answers table, per-question chat shape, answer-choice format | required | pending |
+
+Record any stronger repo-local equivalent or adaptation in the manifest, including why it replaces the source schema and which required preservation points it still satisfies.
 
 ## Version Provenance
 

@@ -4,12 +4,32 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.17.0`
-- `maintain-agentic-system`: `1.7.1`
+- `bootstrap-agentic-system`: `1.18.2`
+- `maintain-agentic-system`: `1.8.0`
 - `create-work-item-planning-skills`: `1.3.1`
 - `create-work-item-from-description`: `1.0.0`
 
 ## 2026-07-27
+
+### `bootstrap-agentic-system` 1.18.2
+
+- Refined root-instruction, file-plan, and generated-system templates so schema paths, manifest provenance, prompt-sensitive routing, and non-monolithic root instructions are explicit in supporting artifacts.
+
+### `bootstrap-agentic-system` 1.18.1
+
+- Required Bootstrap to copy `templates/plan-schema.md` and `templates/question-schema.md` into the approved repo-local schema paths unless an approved stronger equivalent is recorded.
+- Clarified that generated root instructions must stay prompt-sensitive and navigational instead of becoming a monolithic fact dump or duplicated agent-contract bundle.
+
+### `bootstrap-agentic-system` 1.18.0
+
+- Rewrote the public Bootstrap skill around the generated-template source model and a phase-based workflow from intake through maintenance handoff.
+- Made enriched Canonical Template Mirrors the primary generated-runtime source, with Bootstrap responsible for placeholder fill, marker stripping, schema-path verification, contract audit, and manifest evidence.
+- Added explicit handling for string-valued `tools:` entries, including replacing `"{{APPROVED_MCP_TOOLS}}"` with exact approved quoted tool names or removing it when no additional tools are approved.
+
+### `maintain-agentic-system` 1.8.0
+
+- Added explicit upstream, schema, template, and changelog reconciliation for systems created from the rewritten Bootstrap source model.
+- Required Maintainer to classify each Bootstrap contract delta as applied, not applicable, deferred, superseded, unknown, or requiring update using manifest records, changelog snapshots, current installed changelogs, and direct repository evidence.
 
 ### `bootstrap-agentic-system` 1.17.0
 

@@ -1,6 +1,6 @@
 ---
 description: "Planning-Orchestrator Agent for the application development workflow"
-tools: [vscode/askQuestions, read/readFile, search/listDirectory, search/usages]
+tools: [vscode/askQuestions, read/readFile, search/listDirectory, search/usages, "{{APPROVED_MCP_TOOLS}}"]
 disable-model-invocation: true
 ---
 
@@ -42,7 +42,6 @@ Provide code examples to clarify answers, following the Code Examples rules belo
 - Search-plan batching is mandatory. Whenever multiple codebase questions can be answered by one `optional work item integration` call, the agent must pack them into the same call instead of splitting them across multiple calls.
 - Reducing agent-loop round trips is a hard requirement, not an optimization hint. Splitting compatible searches across multiple `execute_search_plan` calls is a workflow violation unless one explicit blocker makes a single batched call impossible.
 <!-- CANONICAL-TEMPLATE-SLOT: REPOSITORY_SEARCH_TOOL END -->
-
 ## Gate execution model
 
 - All gates are mandatory and strictly linear.
@@ -60,7 +59,6 @@ Provide code examples to clarify answers, following the Code Examples rules belo
 - If knowledges and codebase conflict, stop and ask for clarification before answering.
 - Always reference the knowledges used in the final answer.
 <!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE END -->
-
 ## Lightweight discipline
 
 - Ask clarifying questions only if required to answer accurately.
@@ -111,7 +109,6 @@ Must do:
 - Read the relevant knowledge files before any codebase exploration.
 - Prioritize knowledges as the first source of truth for project-specific answers.
 <!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE END -->
-
 Do not:
 
 - Do not search the codebase before knowledge discovery.

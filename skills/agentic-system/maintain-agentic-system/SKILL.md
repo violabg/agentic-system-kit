@@ -54,6 +54,21 @@ If no manifest or repo-local Bootstrap changelog snapshot exists, do not assume 
 
 Do not treat the manifest or repo-local Bootstrap changelog snapshot as the only evidence. If the repository files already satisfy a later Bootstrap release requirement, record that changelog entry as `applied` even when the local snapshot is missing, stale, or older than the current installed Bootstrap skill changelog.
 
+## Upstream, Schema, And Template Reconciliation
+
+When maintaining a system created or updated by Bootstrap, explicitly reconcile all current Bootstrap source-model changes before proposing edits. This includes changes to Canonical Template Mirrors, schema templates, role-contract templates, artifact-gate templates, generated-system blueprint, Bootstrap changelog entries, and manifest requirements.
+
+Classify each discovered delta as exactly one of:
+
+- `applied`: the existing repository files already satisfy the delta.
+- `not applicable`: the delta does not apply to this repository's approved platform, tracker, session, glossary, knowledge, visual, or skill choices.
+- `deferred`: the delta applies but the user approved postponing it.
+- `superseded`: a later approved repository-local decision or newer Bootstrap contract replaces the delta.
+- `unknown`: the current evidence is insufficient; propose a bounded verification step or ask a targeted question.
+- `requires update`: the delta applies and the repository does not satisfy it; map it to a proposed file operation.
+
+Schema deltas must be checked against generated Planner contracts and repo-local schema files, not treated as mirror drift alone. Template deltas must be checked through the manifest's source-template records and the current generated runtime files, remembering that generated runtime files should not contain source-only `CANONICAL-TEMPLATE-SLOT` markers. Changelog deltas must be cross-checked against direct repository evidence before declaring them missing.
+
 ## Existing-System Detection
 
 An existing Agentic System requires at least one root instruction file plus at least one agent-system component, such as a custom agent, skill, prompt, governance doc, knowledge doc, artifact template, or session workflow.

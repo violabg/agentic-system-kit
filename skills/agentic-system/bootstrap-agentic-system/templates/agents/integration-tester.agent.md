@@ -1,20 +1,6 @@
 ---
 description: "Integration test Executor agent for the application development workflow"
-tools:
-  [
-    vscode/askQuestions,
-    execute/getTerminalOutput,
-    execute/runInTerminal,
-    read/problems,
-    read/readFile,
-    agent,
-    edit/createDirectory,
-    edit/createFile,
-    edit/editFiles,
-    edit/rename,
-    search/listDirectory,
-    search/usages,
-  ]
+tools: [vscode/askQuestions, execute/getTerminalOutput, execute/runInTerminal, read/problems, read/readFile, agent, edit/createDirectory, edit/createFile, edit/editFiles, edit/rename, search/listDirectory, search/usages, "{{APPROVED_MCP_TOOLS}}"]
 agents: [agent]
 disable-model-invocation: true
 ---
@@ -40,7 +26,6 @@ No production implementation, refactoring, or non-test redesign.
 No unit, system, or e2e tests.
 
 <!-- CANONICAL-TEMPLATE-SLOT: INTEGRATION_TEST_SCOPE END -->
-
 The agent can work both with:
 
 - A full approved implementation plan.
@@ -110,7 +95,6 @@ Use diagnostic and test feedback to identify the exact missing information befor
 - Read session artifacts once after session activation. If you have already read them for the active session, reuse that information and do not read them again unless new artifacts are explicitly mentioned or created.
 - Log session activation, major decisions, blockers, and phase completions.
 <!-- CANONICAL-TEMPLATE-SLOT: SESSION_ACTIVATION END -->
-
 ## Knowledge alignment
 
 <!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE START -->
@@ -125,7 +109,6 @@ Use diagnostic and test feedback to identify the exact missing information befor
 - Search-plan batching is mandatory. Whenever multiple reconnaissance questions can be answered by one `optional work item integration` call, the agent must pack them into the same call instead of splitting them across multiple calls.
 - Reducing agent-loop round trips is a hard requirement, not an optimization hint. Splitting compatible searches across multiple `execute_search_plan` calls is a workflow violation unless one explicit blocker makes a single batched call impossible.
 <!-- CANONICAL-TEMPLATE-SLOT: REPOSITORY_SEARCH_TOOL END -->
-
 ## Repository Discovery Budget
 
 <!-- CANONICAL-TEMPLATE-SLOT: REPOSITORY_SEARCH_TOOL START -->
@@ -161,7 +144,6 @@ Examples of VALID searches:
 - What namespace contains `<IntegrationTestHelper>`?
 - What is the signature of `<BootstrapMethod>`?
 <!-- CANONICAL-TEMPLATE-SLOT: REPOSITORY_SEARCH_TOOL END -->
-
 ## Hard-stop condition
 
 - If there is no valid and approved implementation plan and no specific implementation details provided by the user for integration test creation, stop and respond exactly:

@@ -4,9 +4,24 @@ Install-safe release history for the `bootstrap-agentic-system` skill. Bootstrap
 
 ## Current Version
 
-- `1.17.0`
+- `1.18.2`
 
 ## 2026-07-27
+
+### 1.18.2
+
+- Refined root-instruction, file-plan, and generated-system templates so schema paths, manifest provenance, prompt-sensitive routing, and non-monolithic root instructions are explicit in supporting artifacts.
+
+### 1.18.1
+
+- Required Bootstrap to copy `templates/plan-schema.md` and `templates/question-schema.md` into the approved repo-local schema paths unless an approved stronger equivalent is recorded.
+- Clarified that generated root instructions must stay prompt-sensitive and navigational instead of becoming a monolithic fact dump or duplicated agent-contract bundle.
+
+### 1.18.0
+
+- Rewrote the public Bootstrap skill around the generated-template source model and a phase-based workflow from intake through maintenance handoff.
+- Made enriched Canonical Template Mirrors the primary generated-runtime source, with Bootstrap responsible for placeholder fill, marker stripping, schema-path verification, contract audit, and manifest evidence.
+- Added explicit handling for string-valued `tools:` entries, including replacing `"{{APPROVED_MCP_TOOLS}}"` with exact approved quoted tool names or removing it when no additional tools are approved.
 
 ### 1.17.0
 

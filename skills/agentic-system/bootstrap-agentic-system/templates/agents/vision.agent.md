@@ -1,10 +1,15 @@
 ---
 description: "This custom agent analyzes images and produces a detailed JSON representation of the visual content."
-tools: [edit/createFile, edit/editFiles]
+tools: [edit/createFile, edit/editFiles, "{{APPROVED_MCP_TOOLS}}"]
 disable-model-invocation: true
 ---
 
 # Source Mapping
+
+<!-- CANONICAL-TEMPLATE-SLOT: VISUAL_ARTIFACT_FORMAT START -->
+## Bootstrap Template Visual Artifact Format
+- Convert visual evidence into `{{VISUAL_ARTIFACT_FORMAT}}` so non-vision agents can cite deterministic text artifacts.
+<!-- CANONICAL-TEMPLATE-SLOT: VISUAL_ARTIFACT_FORMAT END -->
 
 Cleaned into canonical agent `vision.agent.md`. This canonical copy preserves workflow intent while removing company-identifying names, private MCP server names, and direct source-agent identifiers.
 
@@ -93,7 +98,6 @@ session_id: <session_id>
 artifact_name: <artifact_name>
 ```
 <!-- CANONICAL-TEMPLATE-SLOT: VISUAL_ARTIFACT_STORAGE END -->
-
 If the runtime doesn't support agent-session artifacts, save the SlimUI as:
 
 ```

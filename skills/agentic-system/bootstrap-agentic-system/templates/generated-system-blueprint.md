@@ -14,7 +14,7 @@ The Core System batch should normally include:
 
 | File | Required | Purpose |
 | --- | --- | --- |
-| `AGENTS.md` | Yes, unless an approved platform equivalent replaces it | Stable entrypoint that routes agents to contracts, skills, templates, session rules, glossary, knowledge index, and validation commands. |
+| `AGENTS.md` | Yes, unless an approved platform equivalent replaces it | Stable prompt-sensitive entrypoint that routes agents to contracts, skills, repo-local schemas, templates, session rules, glossary, knowledge index, manifest, relevant partials, and validation commands without becoming a monolithic fact dump. |
 | `<agent-dir>/<prefix>-planner.agent.md` | Yes | Planning-only role that clarifies, selects knowledge, drafts the approved implementation plan, and hands off. |
 | `<agent-dir>/<prefix>-implementor.agent.md` | Yes | Implementation role that edits only from an approved plan and validates the touched behavior. |
 | `<agent-dir>/<prefix>-tester.agent.md` | Yes | Test role for approved test strategy, integration tests, or repo-specific validation. |
@@ -132,7 +132,7 @@ sessions/                          # or approved external session root
 - Fill only approved Personalization Slots. Ask before changing non-slot canonical wording.
 - Strip source-only `CANONICAL-TEMPLATE-SLOT` marker comments from final generated runtime files after applying approved slot content.
 - Record each generated mirror's source path, generated path, approved slot replacements, approved placeholder values, source-only marker stripping, and any approved non-slot wording or relocation changes in the manifest.
-- Keep root instructions short and navigational. Put full authority rules in agent contracts.
+- Keep root instructions short, navigational, and prompt-sensitive. Put full authority rules in agent contracts, route each request to the relevant schemas, knowledge-index entries, glossary, partials, and validation commands, and do not bulk-load repository facts or full role contracts into every request.
 - Keep the context glossary focused on repository code/domain vocabulary, not broad docs or agent-system narration.
 - Keep the knowledge index separate from the glossary. It routes knowledge loading by `When to read` triggers.
 - Keep mirrored agent files as the complete runtime authority for their canonical body. Use partial files only for repo-specific extensions, optional mode guidance, or custom roles without mirrors.
@@ -148,8 +148,8 @@ sessions/                          # or approved external session root
 
 Before asking for approval or handing off, confirm:
 
-- Root instructions name every generated agent, generated skill location, template directory, session root, glossary path when present, and knowledge-index path.
-- Root instructions name every generated agent, generated skill location, template directory, session root, glossary path when present, knowledge-index path, and agentic-system manifest path.
+- Root instructions name every generated agent, generated skill location, template directory, session root, glossary path when present, knowledge-index path, plan-schema path, question-schema path, agentic-system manifest path, and Bootstrap changelog snapshot path.
+- Root instructions are prompt-sensitive and navigational, not a monolithic fact dump: they tell agents what to consult for the current request and avoid bulk-loading repository facts or full role contracts.
 - The agentic-system manifest records the Bootstrap skill version used, the Bootstrap contract version applied through, the installed Bootstrap skill changelog path, the repo-local Bootstrap changelog snapshot path, and the generated system paths Maintainer needs for future changelog-delta audits.
 - Each generated main agent file explains which non-mirrored extension partials, if any, are loaded selectively and which shared or cross-role dependency partials must also be loaded when relevant.
 - Every generated agent declares the baseline tool surface from `agent-role-contracts.md` or records an approved reduction.

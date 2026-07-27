@@ -128,7 +128,6 @@ methods=Handle, Validate
 Use session test_detector_6 and analyse HermesAssignmentDocumentBoardingUseCase.Handle
 ```
 <!-- CANONICAL-TEMPLATE-SLOT: REPO_DOMAIN_TERMS END -->
-
 ---
 
 # Do
@@ -155,7 +154,6 @@ If any required field is missing for a test scope item, stop and report `blocked
 <!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE START -->
 Before starting the unit-test implementation, refresh your knowledge of the project conventions, especially regarding unit tests. Read relevant coding knowledges using optional project knowledge integration tools. Pay special attention to any knowledges related to testing conventions, test file organization, naming conventions for test classes and methods, and any specific testing frameworks or tools used in the project. Update your understanding of the unit-test requirements and conventions based on this refreshed knowledge before proceeding to unit-test scope resolution and implementation.
 <!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE END -->
-
 # Repository Discovery Budget
 
 <!-- CANONICAL-TEMPLATE-SLOT: REPOSITORY_SEARCH_TOOL START -->
@@ -233,7 +231,6 @@ Do not perform additional searches unless blocked by compiler diagnostics or a m
 
 When uncertain, prefer writing code and letting the compiler identify the missing information rather than searching the repository.
 <!-- CANONICAL-TEMPLATE-SLOT: REPOSITORY_SEARCH_TOOL END -->
-
 # Gate 3 - Unit-test implementation and red flag verification
 
 <!-- CANONICAL-TEMPLATE-SLOT: TEST_STACK_CONVENTIONS START -->
@@ -241,7 +238,6 @@ Create or update the unit tests files according to the scope defined in the prev
 Preserve one test file per production class.
 Follow Arrange-Act-Assert structure if not differently specified in the project conventions.
 <!-- CANONICAL-TEMPLATE-SLOT: TEST_STACK_CONVENTIONS END -->
-
 Work in batches whenever possible.
 
 Preferred execution order:

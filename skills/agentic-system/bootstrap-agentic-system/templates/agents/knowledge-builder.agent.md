@@ -1,10 +1,24 @@
 ---
 description: "Agent specialized in building knowledges for projects"
-tools: [vscode/askQuestions, read/readFile, agent, edit/createDirectory, edit/createFile, edit/editFiles, edit/rename, search/listDirectory, search/usages]
+tools: [vscode/askQuestions, read/readFile, agent, edit/createDirectory, edit/createFile, edit/editFiles, edit/rename, search/listDirectory, search/usages, "{{APPROVED_MCP_TOOLS}}"]
 disable-model-invocation: true
 ---
 
 # Source Mapping
+
+<!-- CANONICAL-TEMPLATE-SLOT: REPO_KNOWLEDGE_PATHS START -->
+## Bootstrap Template Knowledge Sources
+- Evaluate `{{REPO_KNOWLEDGE_PATHS}}` as candidate source material before proposing knowledge-index entries.
+<!-- CANONICAL-TEMPLATE-SLOT: REPO_KNOWLEDGE_PATHS END -->
+<!-- CANONICAL-TEMPLATE-SLOT: CONTEXT_GLOSSARY_PATH START -->
+## Bootstrap Template Context Glossary Target
+- Use `{{CONTEXT_GLOSSARY_PATH}}` only for resolved repository code/domain vocabulary and source-of-truth boundaries.
+- Do not treat the context glossary as a knowledge index.
+<!-- CANONICAL-TEMPLATE-SLOT: CONTEXT_GLOSSARY_PATH END -->
+<!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_INDEX_PATH START -->
+## Bootstrap Template Knowledge Index Target
+- Maintain knowledge-index entries in `{{KNOWLEDGE_INDEX_PATH}}` and keep `When to read` triggers specific enough to avoid bulk-loading repository knowledge.
+<!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_INDEX_PATH END -->
 
 Cleaned into canonical agent `knowledge-builder.agent.md`. This canonical copy preserves workflow intent while removing company-identifying names, private MCP server names, and direct source-agent identifiers.
 
@@ -21,7 +35,6 @@ Your only task is to explore the codebase in search of symbols, concepts, and pa
 - Search-plan batching is mandatory. Whenever multiple reconnaissance questions can be answered by one `optional work item integration` call, the agent must pack them into the same call instead of splitting them across multiple calls.
 - Reducing agent-loop round trips is a hard requirement, not an optimization hint. Splitting compatible searches across multiple `execute_search_plan` calls is a workflow violation unless one explicit blocker makes a single batched call impossible.
 <!-- CANONICAL-TEMPLATE-SLOT: REPOSITORY_SEARCH_TOOL END -->
-
 **Audience**:
 The knowledge is intended to be an effective guide for AI agents, so it must be written clearly, in detail, and in a way that is easy to interpret for an agent that wants to apply the acquired knowledge to perform a specific task.
 
@@ -53,7 +66,6 @@ Otherwise simply state:
 
 > "I have check knowledge catalog and I have found <knowledge_name> about this topic, so we update it."
 <!-- CANONICAL-TEMPLATE-SLOT: KNOWLEDGE_SOURCE END -->
-
 ## Gate 1.1 Understand the topic
 
 <!-- CANONICAL-TEMPLATE-SLOT: REPOSITORY_SEARCH_TOOL START -->
@@ -70,7 +82,6 @@ Present the list to the user and ask them to choose which topic(s) they want to 
 <!-- CANONICAL-TEMPLATE-SLOT: SESSION_ARTIFACT_STORAGE START -->
 Once the user selects the topic(s), save each selected topic(s) as session artifact using `#tool:optional work item integration`.
 <!-- CANONICAL-TEMPLATE-SLOT: SESSION_ARTIFACT_STORAGE END -->
-
 ### Gate validation
 
 - [ ] I found relevant, unrelated topics related to the user request.

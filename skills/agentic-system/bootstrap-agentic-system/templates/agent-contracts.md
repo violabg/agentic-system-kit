@@ -41,6 +41,12 @@ Minimum sections:
 - Knowledge index: `<path>`
 - Rule: read the index before loading knowledge files and load only matching entries.
 
+## Runtime Schemas
+
+- Implementation plan schema: `<template-dir>/plan-schema.md`
+- Clarification question schema: `<template-dir>/question-schema.md`
+- Rule: cite repo-local schema paths in Planner artifacts and keep schema-required links, anchors, backlinks, approval metadata, operations, validation, risks, and per-question chat shape intact.
+
 ## Sessions And Approval
 
 - Session path:
@@ -57,9 +63,14 @@ Minimum sections:
 - Skills:
 - Templates:
 - Agent partials:
+
+## Provenance
+
+- Manifest: `<agentic-system-manifest-path>`
+- Bootstrap changelog snapshot: `<path>`
 ```
 
-Keep this file short. It should route agents to the right generated contracts, glossary, knowledge index, templates, and validation commands without duplicating full agent instructions.
+Keep this file short, navigational, and prompt-sensitive. It should route agents to the right generated contracts, glossary, knowledge index, repo-local schemas, templates, manifest, prompt-specific partials, and validation commands for the current request without duplicating full agent instructions or bulk-loading repository facts.
 
 When a custom generated agent has no Canonical Template Mirror and the target platform uses Markdown agent contracts, keep the main generated agent file as a stable routing contract. Put prompt-specific procedures, long checklists, or mode-specific instructions into separate Markdown partials and have the main contract name when those partials should be loaded. When a Canonical Template Mirror exists, keep the mirrored runtime body in the main generated file; partials may add repo-specific extensions but must not replace, summarize, rename, or remove mirrored non-slot content unless the user explicitly approves that non-slot relocation.
 

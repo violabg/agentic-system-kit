@@ -4,12 +4,18 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.16.0`
+- `bootstrap-agentic-system`: `1.17.0`
 - `maintain-agentic-system`: `1.7.1`
 - `create-work-item-planning-skills`: `1.3.1`
 - `create-work-item-from-description`: `1.0.0`
 
 ## 2026-07-27
+
+### `bootstrap-agentic-system` 1.17.0
+
+- Made Canonical Template Mirror generation copy-first and authoritative over older modularity or role-template guidance.
+- Required final generated runtime agents and skills to strip source-only `CANONICAL-TEMPLATE-SLOT` marker comments while recording slot decisions in the manifest.
+- Limited prompt-scoped partials and role-contract template adaptation to non-mirrored additions unless the user explicitly approves relocating mirrored non-slot content.
 
 ### `bootstrap-agentic-system` 1.16.0
 

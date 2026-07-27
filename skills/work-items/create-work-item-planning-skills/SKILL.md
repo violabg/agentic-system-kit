@@ -19,19 +19,76 @@ Create both repository-local skills:
 
 Do not create only one. They share the session interface and differ in evidence, analysis, and plan-readiness gates.
 
+## Required Tool Surface
+
+The generated skills must declare the Planner tool surface they require. If the target platform supports skill-level `tools:` frontmatter, include the required tools there. If not, add a `Required Planner Tools` section near the top of each generated skill.
+
+Required baseline Planner tools:
+
+- `vscode/askQuestions`
+- `read/readFile`
+- `agent`
+- `edit/createDirectory`
+- `edit/createFile`
+- `edit/editFiles`
+- `edit/rename`
+- `search/fileSearch`
+- `search/listDirectory`
+- `search/textSearch`
+- `search/usages`
+
+Adapter tools:
+
+- Add the selected GitHub, Jira, Linear, Azure DevOps, Notion, or other tracker MCP tools when those tools are configured or explicitly approved.
+- Use a repository-local Markdown adapter when no external tracker integration is configured; do not invent tracker MCP names.
+- Allow optional subagent handoff through `agent` when the platform supports it and the Planner owns the generated skills.
+- Record any useful but unavailable tracker MCP as a recommendation, not as a required tool.
+- Keep the required tool surface identical between `plan-bug-from-id` and `plan-user-story-from-id` unless one skill has a documented adapter-specific need.
+
+## Issue Tracker Contract
+
+The generated skills require an issue tracker contract. Do not create ID-based planning skills until the repository has one of these adapters:
+
+- External tracker adapter: GitHub, Jira, Linear, Azure DevOps, Notion, or another configured system with approved retrieval tools.
+- Local Markdown adapter: repository-local Markdown files with stable IDs and a documented lookup rule.
+
+External tracker adapters must define:
+
+- tracker name,
+- approved retrieval MCP or platform tools,
+- supported work item types,
+- ID format,
+- fields to retrieve,
+- missing-ID behavior,
+- evidence-to-session Markdown conversion rules.
+
+Local Markdown adapters must define:
+
+- issue root folder,
+- accepted ID pattern,
+- whether lookup is direct path-based or index-based,
+- index file path when index-based lookup is used,
+- required frontmatter or heading fields for bug and user-story records,
+- image or attachment reference handling,
+- missing-ID behavior,
+- duplicate-ID behavior,
+- evidence-to-session copy rules.
+
 ## Session Interface
 
 Before retrieving or analyzing work-item evidence, each generated skill must:
 
 1. Require the source ID.
 2. Normalize it into a stable filesystem-safe session ID containing only letters, numbers, `_`, and `-`.
-3. Ask during bootstrap where the session root should be stored; it may be external to the repository or an internal path that agents are explicitly forbidden to scan.
-4. Create or resume exactly one session folder under that configured root.
-5. Read and write only the current session folder. Never enumerate or read other session folders.
-6. Record the source type, source ID, adapter, retrieval timestamp, evidence, decisions, and final implementation plan in that folder.
-7. Include the session folder path and adapter in the final handoff.
+3. Resolve the source ID through the configured external tracker adapter or local Markdown adapter.
+4. Fail closed when the ID is missing, duplicated, unreadable, or does not match the configured ID pattern.
+5. Ask during bootstrap where the session root should be stored; it may be external to the repository or an internal path that agents are explicitly forbidden to scan.
+6. Create or resume exactly one session folder under that configured root.
+7. Read and write only the current session folder. Never enumerate or read other session folders.
+8. Record the source type, source ID, adapter, retrieval timestamp, evidence, decisions, and final implementation plan in that folder.
+9. Include the session folder path and adapter in the final handoff.
 
-The session folder is the durable seam between external work-item systems and planning. A tracker adapter may read GitHub, Jira, or another configured system. If no tracker is configured, use a local Markdown adapter. Work-item creation is a separate skill and never creates a planning session. Do not require a particular vendor.
+The session folder is the durable seam between issue systems and planning. An external tracker adapter may read GitHub, Jira, or another configured system. If no external tracker is configured, use a local Markdown adapter. Work-item creation is a separate skill and never creates a planning session. Do not require a particular vendor, but do require one issue tracker contract.
 
 ## Generated Skill Requirements
 
@@ -46,6 +103,7 @@ User-story planning must treat acceptance criteria and related work items as pla
 Both skills must:
 
 - preserve source metadata without copying secrets,
+- state the selected external tracker adapter or local Markdown adapter, ID retrieval contract, and required Planner tools,
 - never overwrite a different session,
 - be invokable only by the Planner agent,
 - surface adapter or retrieval failures,
@@ -59,4 +117,4 @@ Both skills must:
 
 Inspect existing agent, skill, artifact, session, glossary, and plan-schema conventions before writing files. Propose the file batch and wait for explicit approval unless the caller has already supplied approval.
 
-After approval, create or update both skills and any shared session template or adapter contract. Validate frontmatter, links, safe session-ID rules, and that both skills reference the same session interface.
+After approval, create or update both skills and any shared session template or adapter contract. Validate frontmatter, required tool surface, links, safe session-ID rules, selected adapter, issue ID retrieval, local Markdown lookup when used, and that both skills reference the same session interface.

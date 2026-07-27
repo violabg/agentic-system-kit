@@ -4,10 +4,37 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.8.0`
+- `bootstrap-agentic-system`: `1.10.0`
 - `maintain-agentic-system`: `1.3.0`
-- `create-work-item-planning-skills`: `1.1.0`
+- `create-work-item-planning-skills`: `1.3.0`
 - `create-work-item-from-description`: `1.0.0`
+
+## 2026-07-27
+
+### `bootstrap-agentic-system` 1.10.0
+
+- Required generated Planner and Tester contracts to preserve baseline `agents:` frontmatter when delegated agents are supported.
+- Required Bootstrap to resolve an issue tracker contract before planning ID-based bug or user-story skills, using either an external tracker adapter or a local Markdown issue tracker.
+
+### `create-work-item-planning-skills` 1.3.0
+
+- Required generated `plan-bug-from-id` and `plan-user-story-from-id` skills to share an issue ID retrieval contract.
+- Added local Markdown adapter requirements for issue root, ID pattern, lookup or index path, required fields, missing-ID behavior, duplicate-ID behavior, and evidence copy rules.
+
+### `bootstrap-agentic-system` 1.9.1
+
+- Required Bootstrap to present discovered MCP and tool assignments for user confirmation before entering system proposal planning.
+- Added bounded choices to add, omit, move, recommend only, or investigate more for each candidate MCP or integration.
+
+### `bootstrap-agentic-system` 1.9.0
+
+- Required generated agents to start from explicit baseline VS Code tool lists and record approved reductions.
+- Added repository MCP discovery and role-based assignment rules for tracker, documentation, context, visual, cloud, runtime, and test integrations.
+
+### `create-work-item-planning-skills` 1.2.0
+
+- Required generated `plan-bug-from-id` and `plan-user-story-from-id` skills to declare the Planner tool surface and selected tracker or local Markdown adapter.
+- Added guidance to use configured tracker MCPs when available and recommend missing useful MCPs without inventing tool names.
 
 ## 2026-07-25
 

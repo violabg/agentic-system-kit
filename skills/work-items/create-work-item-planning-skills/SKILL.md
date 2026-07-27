@@ -19,31 +19,35 @@ Create both repository-local skills:
 
 Do not create only one. They share the session interface and differ in evidence, analysis, and plan-readiness gates.
 
-## Required Tool Surface
+## Required Retrieval Handoff
 
-The generated skills must declare the Planner tool surface they require. If the target platform supports skill-level `tools:` frontmatter, include the required tools there. If not, add a `Required Planner Tools` section near the top of each generated skill.
+Generated skills must not declare skill-level `tools:` frontmatter. Tool frontmatter belongs on generated agents, not these Planner-only skills. Do not add Planner baseline tools, tracker MCP tools, documentation MCP tools, framework MCP tools, or broad integration tool lists to either generated skill's frontmatter.
 
-Required baseline Planner tools:
+Each generated skill must delegate work-item evidence gathering with an inline `#tool:agent/runSubagent` instruction in the skill body.
 
-- `vscode/askQuestions`
-- `read/readFile`
-- `agent`
-- `edit/createDirectory`
-- `edit/createFile`
-- `edit/editFiles`
-- `edit/rename`
-- `search/fileSearch`
-- `search/listDirectory`
-- `search/textSearch`
-- `search/usages`
+`plan-bug-from-id` must include this section before the prompt template:
 
-Adapter tools:
+```markdown
+# Bug Information Gathering
 
-- Add the selected GitHub, Jira, Linear, Azure DevOps, Notion, or other tracker MCP tools when those tools are configured or explicitly approved.
+use #tool:agent/runSubagent to delegate work item gathering to a built-in agent subagent.
+Use the following prompt template for the subagent:
+```
+
+`plan-user-story-from-id` must include this section before the prompt template:
+
+```markdown
+use #tool:agent/runSubagent to delegate work item gathering to a default subagent (leave argument args.agentName empty).
+Use the following prompt template for the subagent:
+```
+
+Adapter requirements:
+
+- Name the selected GitHub, Jira, Linear, Azure DevOps, Notion, other tracker adapter, or local Markdown adapter in the generated skill body.
 - Use a repository-local Markdown adapter when no external tracker integration is configured; do not invent tracker MCP names.
-- Allow optional subagent handoff through `agent` when the platform supports it and the Planner owns the generated skills.
+- Put retrieval-tool details in the subagent prompt or adapter contract, not in skill frontmatter.
 - Record any useful but unavailable tracker MCP as a recommendation, not as a required tool.
-- Keep the required tool surface identical between `plan-bug-from-id` and `plan-user-story-from-id` unless one skill has a documented adapter-specific need.
+- Keep the retrieval handoff and adapter contract identical between `plan-bug-from-id` and `plan-user-story-from-id` unless one skill has a documented adapter-specific need.
 
 ## Issue Tracker Contract
 
@@ -103,7 +107,8 @@ User-story planning must treat acceptance criteria and related work items as pla
 Both skills must:
 
 - preserve source metadata without copying secrets,
-- state the selected external tracker adapter or local Markdown adapter, ID retrieval contract, and required Planner tools,
+- state the selected external tracker adapter or local Markdown adapter and ID retrieval contract,
+- omit `tools:` frontmatter and use the required `#tool:agent/runSubagent` handoff instead,
 - never overwrite a different session,
 - be invokable only by the Planner agent,
 - surface adapter or retrieval failures,
@@ -117,4 +122,4 @@ Both skills must:
 
 Inspect existing agent, skill, artifact, session, glossary, and plan-schema conventions before writing files. Propose the file batch and wait for explicit approval unless the caller has already supplied approval.
 
-After approval, create or update both skills and any shared session template or adapter contract. Validate frontmatter, required tool surface, links, safe session-ID rules, selected adapter, issue ID retrieval, local Markdown lookup when used, and that both skills reference the same session interface.
+After approval, create or update both skills and any shared session template or adapter contract. Validate frontmatter, absence of skill-level `tools:` frontmatter, required `#tool:agent/runSubagent` handoff, links, safe session-ID rules, selected adapter, issue ID retrieval, local Markdown lookup when used, and that both skills reference the same session interface.

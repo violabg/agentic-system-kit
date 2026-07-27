@@ -4,12 +4,34 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.10.0`
-- `maintain-agentic-system`: `1.3.0`
-- `create-work-item-planning-skills`: `1.3.0`
+- `bootstrap-agentic-system`: `1.11.2`
+- `maintain-agentic-system`: `1.4.0`
+- `create-work-item-planning-skills`: `1.3.1`
 - `create-work-item-from-description`: `1.0.0`
 
 ## 2026-07-27
+
+### `bootstrap-agentic-system` 1.11.2
+
+- Added blocking verification that every MCP or platform integration approved during Bootstrap clarification is carried into the named generated agent tool surface by exact tool name.
+
+### `bootstrap-agentic-system` 1.11.1
+
+- Required generated `plan-bug-from-id` and `plan-user-story-from-id` skills to omit skill-level `tools:` frontmatter and use inline `#tool:agent/runSubagent` gathering instructions instead.
+
+### `create-work-item-planning-skills` 1.3.1
+
+- Replaced generated skill `tools:` frontmatter requirements with body-level `#tool:agent/runSubagent` work-item retrieval handoffs for bug and user-story planning skills.
+
+### `bootstrap-agentic-system` 1.11.0
+
+- Kept Bootstrap as one public orchestrator while structuring repository discovery into bounded scout lanes and Gate 2 clarification into a decision register.
+- Required non-trivial Bootstrap runs to audit preservation of the current contract before file-plan approval when subagents are available, with an inline equivalent when unavailable.
+- Required context glossaries created or updated by Bootstrap to normalize synonymous or ambiguous repository wording with preferred terms, terms to avoid, accepted aliases, and distinctions.
+
+### `maintain-agentic-system` 1.4.0
+
+- Added maintenance checks for context-glossary terminology normalization introduced by Bootstrap 1.11.0.
 
 ### `bootstrap-agentic-system` 1.10.0
 

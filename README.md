@@ -27,7 +27,11 @@ Each public skill follows Semantic Versioning.
 - Minor: backward-compatible capabilities, gates, templates, or validation improvements.
 - Major: contract changes, removed behavior, renamed outputs, or breaking workflow changes.
 
-When a public skill changes, increase that skill's version in the changelog before exporting to `agentic-system-kit`. The `Current Skill Versions` section in the changelog is the machine-readable release ledger used by the package checks.
+When a public skill changes, increase that skill's version in the changelog before exporting to `agentic-system-kit`. The `Current Skill Versions` section in the package changelog is the package-wide release ledger used by the package checks.
+
+Each public skill that has version-sensitive maintenance behavior should also ship a skill-local `CHANGELOG.md` inside its own skill folder. Those skill-local changelogs are the install-safe provenance files that travel with `npx skills add`.
+
+Bootstrap-generated systems record their current applied contract version in a repo-local agentic-system manifest, normally `docs/agents/agentic-system-manifest.md`, and keep a repo-local snapshot of the installed Bootstrap skill changelog. The snapshot is the release-history ledger. The manifest is the repository's current-state ledger. Bootstrap reads the installed Bootstrap skill changelog once during setup, copies it into the generated system, and initializes the manifest. Maintainer compares that repo-local snapshot against the currently installed Bootstrap skill changelog, cross-checks the actual repository files before proposing any gap-filling updates, and then refreshes both the repo-local snapshot and the manifest to the new current baseline after approved maintenance succeeds.
 
 ## Install
 

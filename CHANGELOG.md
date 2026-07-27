@@ -4,12 +4,39 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.11.2`
-- `maintain-agentic-system`: `1.4.0`
+- `bootstrap-agentic-system`: `1.13.1`
+- `maintain-agentic-system`: `1.6.1`
 - `create-work-item-planning-skills`: `1.3.1`
 - `create-work-item-from-description`: `1.0.0`
 
 ## 2026-07-27
+
+### `bootstrap-agentic-system` 1.13.1
+
+- Simplified the manifest so the repo-local Bootstrap changelog snapshot carries release history while the manifest carries only current applied-through state, paths, and maintenance history.
+
+### `maintain-agentic-system` 1.6.1
+
+- Required Maintainer to refresh the repo-local Bootstrap changelog snapshot and update the manifest to the new current baseline after approved maintenance succeeds.
+
+### `bootstrap-agentic-system` 1.13.0
+
+- Added an install-safe skill-local `CHANGELOG.md` inside the Bootstrap skill folder and changed Bootstrap provenance capture to read that skill-local changelog once, copy it into the generated repository as a local snapshot, and record the installed changelog path plus snapshot path in the manifest.
+- Changed Maintainer alignment expectations so Bootstrap changelog-delta maintenance uses the repo-local snapshot and the currently installed Bootstrap skill changelog as the primary sources, while still cross-checking actual repository files before declaring a gap.
+
+### `maintain-agentic-system` 1.6.0
+
+- Changed maintenance provenance rules to prefer the repo-local Bootstrap changelog snapshot and the currently installed Bootstrap skill `CHANGELOG.md` over the package-root changelog.
+- Required Maintainer to keep using direct repository evidence to mark entries `applied` when the repo already satisfies a later Bootstrap release even if local version files are missing or stale.
+
+### `bootstrap-agentic-system` 1.12.0
+
+- Required generated systems to include an agentic-system manifest, normally `docs/agents/agentic-system-manifest.md`, recording the Bootstrap skill version used, Bootstrap contract applied-through version, changelog source, generated system paths, applied Bootstrap changelog entries, and maintenance history.
+- Added a manifest template and Version Provenance file-plan section so future maintenance can compute Bootstrap contract deltas from the package changelog.
+
+### `bootstrap-agentic-system` 1.11.3
+
+- Required generated Planner contracts to present blocking clarification questions in chat using the question schema's per-question chat shape, not only record that schema in artifacts.
 
 ### `bootstrap-agentic-system` 1.11.2
 

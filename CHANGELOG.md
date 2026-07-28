@@ -4,10 +4,21 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.18.2`
+- `bootstrap-agentic-system`: `1.19.0`
 - `maintain-agentic-system`: `1.8.0`
-- `create-work-item-planning-skills`: `1.3.1`
+- `create-work-item-planning-skills`: `1.4.0`
 - `create-work-item-from-description`: `1.0.0`
+
+## 2026-07-28
+
+### `bootstrap-agentic-system` 1.19.0
+
+- Distinguished External Issue ID from Planning Session ID; required current-issue-only retrieval, explicit-reference dependency evidence, type-aware session recommendations, direct current-session resume, and conditional planning clarification.
+- Required Bootstrap's decision interview to resolve one evidence-backed decision at a time, including user-controlled generation batches and approval checkpoints.
+
+### `create-work-item-planning-skills` 1.4.0
+
+- Required isolated External Issue ID retrieval, Planning Session ID naming, direct session resume, and evidence-based conditional cause or clarification questions.
 
 ## 2026-07-27
 

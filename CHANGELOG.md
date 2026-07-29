@@ -4,10 +4,42 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `1.19.0`
-- `maintain-agentic-system`: `1.8.0`
-- `create-work-item-planning-skills`: `1.4.0`
+- `bootstrap-agentic-system`: `2.0.0`
+- `maintain-agentic-system`: `2.0.0`
 - `create-work-item-from-description`: `1.0.0`
+
+Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-07-29
+
+### `bootstrap-agentic-system` 2.0.0
+
+- Required every install to write a maintenance baseline: `agentic-system.answers.yaml`, a pristine `.baseline/` copy of every generated file, and a customization register in the manifest.
+- Added `templates/agentic-system-answers.md` so approved slot values, capability resolutions, and generated-to-baseline path pairs are recorded machine-readably.
+- Split the skill into a router plus phase contracts under `contracts/`.
+- Replaced the collapsed private-tool sanitization with a capability-token substitution map, so each generated agent states which substitute a given upstream capability uses.
+- Removed the separate clarification-question schema template, which duplicated and had drifted from the format the generated Planner already defines.
+- Added an `agent-session-persistence` capability covering cross-gate memory, session artifacts, and the execution report.
+- Started rendering `templates/` and `registry/` at export time from the canonical sources.
+- Shipped `registry/placeholders.yaml` and `registry/capabilities.yaml` with the skill so the decision register runs from a declared slot list inside the target repository.
+- Required each slot decision to inspect the declared `infer_from` evidence, state the `recommend` default, and record the inferred proposal beside the user's answer.
+- Required essential capabilities to survive through their declared fallback when the target platform has no native tool.
+- Fixed the generated work-item planning contract, which listed an unresolved generator expression instead of the retrieval fields to collect.
+- Added `templates/instructions/` with a root instruction router and modular knowledge-guard and planning-session instruction files.
+- Added the `author-repo-skill` mirror, installed into the target repository, covering repository-local skill creation and skill evolution generically.
+
+### `create-work-item-planning-skills` removed
+
+- Removed from the kit. It regenerated the two planning skills that Bootstrap already installs from the same mirrors, so the two copies could disagree. Existing generated `plan-bug-from-id` and `plan-user-story-from-id` files are unaffected; rework them with the installed `author-repo-skill`.
+
+### `maintain-agentic-system` 2.0.0
+
+- Replaced the ad hoc upgrade review with an explicit three-way merge per region against the pristine baseline, the answers-file re-render, and the current repository file.
+- Added `upgrade`, `evolve`, and `audit` modes to one entrypoint, with `audit` read-only.
+- Added customization register rules so a recorded deviation is not re-litigated at every upgrade.
+- Defined the degraded path for systems with no baseline or answers file.
+- Split the skill into a router plus `contracts/`, and removed the duplicated generated-system checklist in favour of citing the Bootstrap audit contract.
+- Dropped the separate clarification-question schema from the expected generated system, since the generated Planner already carries that format.
 
 ## 2026-07-28
 

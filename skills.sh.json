@@ -12,10 +12,9 @@
     },
     {
       "title": "Work Items",
-      "description": "Create and plan tracker-backed or local work items.",
+      "description": "Create tracker-backed or local work items.",
       "skills": [
-        "create-work-item-from-description",
-        "create-work-item-planning-skills"
+        "create-work-item-from-description"
       ]
     }
   ]

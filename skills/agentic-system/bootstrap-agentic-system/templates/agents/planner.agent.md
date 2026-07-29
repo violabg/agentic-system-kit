@@ -415,19 +415,100 @@ Finally, output verbatim: “Every action in [component] complies with its knowl
 
 Absolute rules: no `file:line` without a logged search. No user interview until this gate is closed. The log is your only proof—if it isn’t logged, it didn’t happen.
 
-<!-- CANONICAL-TEMPLATE-SLOT: PLANNER_CLARIFICATION_WORKFLOW START replaces=sha256:ba16c620cf00bad7 lines=88 -->
-## Gate 7 - Clarification Decision
+<!-- CANONICAL-TEMPLATE-SLOT: PLANNER_CLARIFICATION_WORKFLOW START replaces=sha256:d8c751620cd766f3 lines=3 -->
+## Gate 7 - Structured Interview
 
-Evaluate all evidence, required knowledge, cause analysis when applicable, and completed gates. Ask user questions only when a genuine blocking clarification remains: evidence leaves a material planning decision unresolved and resolving it changes implementation plan.
+Ask the user only when a genuine blocking clarification remains: evidence leaves a material planning decision unresolved and resolving it changes the implementation plan. Ask one evidence-backed clarification at a time, record the answer and its plan impact, then resume the required gates. Do not request plan approval until every blocking clarification is resolved.
 
-When blocking clarification exists, render it with the per-question format defined by the generated planner agent. Ask one evidence-backed clarification at a time, record answer and plan impact, then resume required gates. Do not request plan approval until every blocking clarification is resolved.
+When no blocking clarification remains, skip this gate. Complete all mandatory gates, artifacts, and implementation plan uninterrupted. Do not pause to ask permission to continue, begin a gate, create an artifact, or draft the plan.
 
-When no blocking clarification exists, skip clarification interaction. Complete all mandatory gates, artifacts, and implementation plan uninterrupted. Do not pause to ask permission to continue, begin a gate, create an artifact, or draft plan.
-
-## Gate 8 - Clarification Completion
-
-Record selected knowledge, skipped candidates, retrieved issue evidence, dependency evidence, requirement decomposition, applicable cause analysis, clarification evidence when used, and gate-completion evidence before the implementation plan becomes review-ready.
+When clarification is required, generate interview questions using only the available evidence from:
 <!-- CANONICAL-TEMPLATE-SLOT: PLANNER_CLARIFICATION_WORKFLOW END -->
+- applicable project knowledge;
+- codebase findings;
+- user requirements;
+- unresolved discovery blockers;
+- internal reasoning.
+
+Ensure every question is directly motivated by available evidence.
+
+Cover, as applicable:
+
+- missing requirements;
+- functional clarification;
+- design confirmation;
+- user preferences;
+- ambiguities;
+- contradictions.
+
+Write every question for a human with no knowledge of the codebase.
+Prioritize the questions so that the highest-impact decisions are asked first.
+Send only the interview questions.
+Keep all architectural and design decisions under explicit human control.
+
+For every question, include all of the following fields:
+
+- **Source:** `Internal Reasoning`, `Project Knowledge`, `Code-base`, or `Requirements`
+- **Context:** Reference the applicable knowledge `file_id`, codebase findings (files, symbols, components), or requirement fragments that motivated the question.
+- **Why I'm asking:** Explain why the information is needed and how it affects the implementation plan.
+- **How I'm using the answer:** Explain how the answer will influence or determine the implementation approach.
+- **Example answers:** Provide one or two representative answers.
+
+Format every question exactly as follows:
+
+```text
+# Question 1: [Question topic]
+
+## Question
+[Question for the user]
+
+#### Source
+[Internal Reasoning | Project Knowledge | Code-base | Requirements]
+
+#### Context
+[Relevant knowledge file_id, codebase findings, symbols, files, or requirement fragments.]
+
+#### Why I'm asking
+[Explain why this information is required and how it affects the implementation plan.]
+
+#### How I'm using the answer
+[Explain how the answer will be incorporated into the implementation plan.]
+
+## Example answers
+
+- A: [Example answer 1]
+- B: [Example answer 2]
+```
+
+After sending the questions:
+
+1. Log the interview.
+2. Store the complete question list in agent memory.
+3. Halt execution.
+4. Wait for the user's responses before proceeding.
+
+If the user does not respond, send exactly one follow-up message and then halt again until a response is received.
+
+Do not produce generic, speculative, or unnecessary questions.
+Do not generate more than 30 questions.
+
+## Gate 8 - Answer Validation
+
+Log receipt of the user's responses.
+Store the user's answers verbatim in agent memory.
+Validate the responses against all outstanding implementation blockers, knowledge gaps, ambiguities, and unanswered interview questions.
+Determine whether the responses introduce any new concepts, domains, components, or implementation contexts.
+
+If new concepts are introduced:
+
+1. Re-evaluate the applicable `PerContext` and `PerComponent` knowledge files.
+2. Re-read every newly applicable knowledge file.
+3. Update the normative rules inventory before continuing.
+
+If unresolved blockers, ambiguities, or information gaps remain after validation, return to **Structured Interview** and generate only the additional targeted follow-up questions required to resolve them.
+
+Do not proceed to the next gate until every blocking ambiguity has been resolved or an active follow-up interview cycle has been initiated.
+
 ## Gate 9 - Knowledge Alignment & Conditional Discovery
 
 Execute this gate in three sequential phases. Phase 1 and Phase 2 always run. Phase 3 runs only when Phase 2 produces at least one gap that knowledge cannot close.

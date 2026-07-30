@@ -4,11 +4,20 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `3.0.0`
+- `bootstrap-agentic-system`: `3.1.0`
 - `maintain-agentic-system`: `2.0.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-07-30
+
+### `bootstrap-agentic-system` 3.1.0
+
+- Required generated planning workflows to create or resume the planning-session folder before artifact intake, clarification, or plan drafting.
+- Expanded the generated session contract so planning persists a deterministic artifact package instead of only the implementation plan, including issue-intake artifacts such as `*_info` or `*_details`, `normative_rules_inventory.md`, and bug cause or visual evidence artifacts when they are part of the upstream flow.
+- Updated the generated planning contract to preserve separate session-memory, session-log, and execution-report files when fallback file-based session persistence is used.
+- Replaced the generated implementation-plan schema with the current four-section schema, including the linked filesystem tree anchor, file-detail backlinks, and operations timeline requirements.
 
 ## 2026-07-29
 

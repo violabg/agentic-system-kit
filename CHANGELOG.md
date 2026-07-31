@@ -4,11 +4,25 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `3.1.0`
+- `bootstrap-agentic-system`: `3.1.2`
 - `maintain-agentic-system`: `2.0.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-07-31
+
+### `bootstrap-agentic-system` 3.1.2
+
+- Reduced repeated work-item planning instructions by keeping retrieval semantics in the subagent prompt instead of restating them in the generated planning-contract preamble.
+- Kept the required tracker, session, dependency-evidence, and clarification constraints while moving the generated planning mirrors closer to their canonical skill wording.
+
+## 2026-07-31
+
+### `bootstrap-agentic-system` 3.1.1
+
+- Replaced additive work-item planning overlay insertion with full conflicting-body replacement for the generated `plan-bug-from-id` and `plan-user-story-from-id` mirrors.
+- Removed contradictory duplicate planning instructions so generated work-item skills stay close to canonical wording while keeping only the required tracker, session, and clarification contract additions.
 
 ## 2026-07-30
 

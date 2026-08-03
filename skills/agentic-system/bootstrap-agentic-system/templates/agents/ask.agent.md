@@ -22,7 +22,17 @@ The source agent called a private server for these operations. Each one keeps it
 
 | Capability | Substitute in the generated system |
 | --- | --- |
+| `#capability:agent-workflow-service` | The source granted this role broad private workflow-service access. Do not install an equivalent by default; resolve only the concrete role capabilities evidenced elsewhere in this contract. |
 | `#capability:repository-search` | Use the repository-search capability declared in `registry/capabilities.yaml`. |
+
+## Role Tooling Intent
+
+Use this profile during Bootstrap discovery. It describes target capability categories inferred from this role's private upstream-tool scope; it never requires the original service or any named replacement.
+
+| Target capability category | Source capability evidence | Bootstrap discovery guidance |
+| --- | --- | --- |
+| Repository discovery | `#capability:repository-search` | Perform bounded code and symbol discovery. Prefer the target platform's repository-search tools or an already configured search service. |
+| Broad workflow-service grant | `#capability:agent-workflow-service` | The source granted broad private service access. Treat this as audit evidence only; resolve concrete capabilities from the role contract before proposing any target tool. |
 
 <critical>
 

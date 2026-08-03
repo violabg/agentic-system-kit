@@ -4,9 +4,14 @@ Install-safe release history for the `bootstrap-agentic-system` skill. Bootstrap
 
 ## Current Version
 
-- `3.2.0`
+- `3.3.0`
 
 ## 2026-08-03
+
+### 3.3.0
+
+- Added per-role tooling-intent profiles inferred from the upstream private-tool scope, so target tool discovery can distinguish tracker, knowledge, repository search, visual evidence, and repository-local session needs.
+- Required Bootstrap to resolve only evidence-backed, least-privilege target tools per role, including conditional documentation support for current external framework, library, vendor, or API contracts.
 
 ### 3.2.0
 

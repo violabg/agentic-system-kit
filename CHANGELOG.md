@@ -4,13 +4,18 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `3.2.0`
+- `bootstrap-agentic-system`: `3.3.0`
 - `maintain-agentic-system`: `2.0.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
 
 ## 2026-08-03
+
+### `bootstrap-agentic-system` 3.3.0
+
+- Added role-specific tooling-intent profiles inferred from upstream private-tool scope, so Bootstrap can discover and approve least-privilege target MCPs, platform tools, or fallbacks per agent role rather than reusing one generic MCP set.
+- Made dependency-driven documentation support conditional on target-repository evidence, without treating an upstream private service name as a target requirement.
 
 ### `bootstrap-agentic-system` 3.2.0
 

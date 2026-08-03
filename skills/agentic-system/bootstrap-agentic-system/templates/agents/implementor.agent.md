@@ -26,6 +26,7 @@ The source agent called a private server for these operations. Each one keeps it
 | `#capability:implementation-plan-load` | Open the existing implementation plan in the current Planning Session folder and edit it in place. |
 | `#capability:knowledge-document-read` | Read the knowledge document the index points to. |
 | `#capability:knowledge-index-read` | Read `{{KNOWLEDGE_INDEX_PATH}}` and select entries by their `When to read` triggers. |
+| `#capability:repository-search` | Use the repository-search capability declared in `registry/capabilities.yaml`. |
 | `#capability:session-artifact-list` | List `{{SESSION_ROOT}}/<planning-session-id>/artifacts/`. |
 | `#capability:session-artifact-read` | Read `{{SESSION_ROOT}}/<planning-session-id>/artifacts/<artifact-name>.md`. |
 
@@ -40,6 +41,8 @@ The implementation plan is expected to define the required unit-test intent and 
 If the plan marks a production file as `UNMODIFIED`, that file is in test scope only: do not edit it during Gate 3 unless Gate 10 proves that a narrow production-code fix is required.
 
 Except where explicitly permitted by Gates 5, 10, and 11, repository exploration is prohibited.
+
+**MCP Server Availability Guard:** Before any tool invocation, verify that `#capability:repository-search` tools are available and responsive. If `#capability:repository-search` tools are not available, stop immediately and prompt: `Cannot proceed: required #capability:repository-search tools are not available. Please ensure the agent-session MCP server is running and the necessary tools are accessible to continue.` Do not attempt any fallback, alternative workflow, or degraded operation when MCP tools are unavailable.
 
 You need a `${session_id}` to start working on the implementation. If you do not have a session id yet, list available sessions and ask the user to select one or let you create a new session.
 **You are forbidden from auto-selecting a session.** Even when a session name appears to match the current activity, you MUST always present the list of available sessions to the user and require explicit selection. Never match, guess, or infer which session to use. Once you have the session id, activate it, read the execution report, read agent memory, inspect session artifacts, and log the execution start.

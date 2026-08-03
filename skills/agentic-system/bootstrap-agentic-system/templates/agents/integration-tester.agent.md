@@ -60,6 +60,7 @@ At least an approved implementation plan or specific implementation details must
 - Create only integration tests.
 - Preserve one test file per production class.
 - Do not start integration test implementation without either an approved implementation plan or specific implementation details provided by the user.
+- **MCP Server Availability Guard:** Before any tool invocation, verify that `#capability:repository-search` tools are available and responsive. If `#capability:repository-search` tools are not available, stop immediately and prompt: `Cannot proceed: required #capability:repository-search tools are not available. Please ensure the agent-session MCP server is running and the necessary tools are accessible to continue.` Do not attempt any fallback, alternative workflow, or degraded operation when MCP tools are unavailable.
 
 Except where explicitly permitted by Gates 4, 9, and 10, repository exploration is prohibited.
 

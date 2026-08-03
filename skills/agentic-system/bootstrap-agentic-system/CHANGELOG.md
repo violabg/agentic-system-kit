@@ -4,7 +4,14 @@ Install-safe release history for the `bootstrap-agentic-system` skill. Bootstrap
 
 ## Current Version
 
-- `3.1.2`
+- `3.2.0`
+
+## 2026-08-03
+
+### 3.2.0
+
+- Added capability-availability guards to generated Ask, Implementor, Integration Tester, Knowledge Builder, and Planner agents, with explicit no-fallback behavior when required capabilities are unavailable.
+- Tightened generated Planner gate execution and failure handling so gates remain linear and failures are logged, summarized, clarified, and halted consistently.
 
 ## 2026-07-31
 

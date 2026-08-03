@@ -4,11 +4,18 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `3.1.3`
+- `bootstrap-agentic-system`: `3.2.0`
 - `maintain-agentic-system`: `2.0.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-08-03
+
+### `bootstrap-agentic-system` 3.2.0
+
+- Added capability-availability guards to generated Ask, Implementor, Integration Tester, Knowledge Builder, and Planner agents, with explicit no-fallback behavior when required capabilities are unavailable.
+- Tightened generated Planner gate execution and failure handling so gates remain linear and failures are logged, summarized, clarified, and halted consistently.
 
 ## 2026-07-31
 

@@ -4,11 +4,26 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `3.3.0`
-- `maintain-agentic-system`: `2.0.0`
+- `bootstrap-agentic-system`: `4.0.0`
+- `maintain-agentic-system`: `2.1.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-09-13
+
+### `bootstrap-agentic-system` 4.0.0
+
+- Required capabilities now accept an approved native tool, repository skill, configured integration, or local fallback; unavailable bindings still block the affected operation.
+- Replaced source-platform invocation requirements with declared platform slots, including inline evidence gathering without subagents and role-specific tool mappings.
+- Added an explicit local test-plan YAML fallback and verification of compatible existing repository schemas before selecting them.
+- Resolved session resume and planning-artifact authority contradictions; known sessions resume directly without enumeration.
+- Made tracker decisions conditional on the selected workflow and allowed routine inferred defaults to be approved together.
+- Restored mechanically converted skill bodies, including the unit-test invocation examples, and reconciled the prior package-ledger lag behind the install-safe 3.4.0 release.
+
+### `maintain-agentic-system` 2.1.0
+
+- Re-fill role-specific slots from the exact generated-file entry in recorded answers; a missing entry requires a decision instead of borrowing another role's tools.
 
 ## 2026-08-03
 

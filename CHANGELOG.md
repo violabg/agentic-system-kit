@@ -4,11 +4,17 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `4.0.0`
+- `bootstrap-agentic-system`: `4.1.0`
 - `maintain-agentic-system`: `2.1.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-09-17
+
+### `bootstrap-agentic-system` 4.1.0
+
+- Added an explicit Vision model decision. Bootstrap recommends the canonical upstream Vision default when supported by the target platform, asks for the user's exact choice when Vision is selected, and records an approved platform-default omission when appropriate.
 
 ## 2026-09-13
 

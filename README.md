@@ -4,11 +4,13 @@
 
 ## Skills
 
-- `bootstrap-agentic-system`: choose this when a repository does not yet have a deliberate agent workflow, or when an existing setup is informal enough that it should be redesigned from first principles. The skill inspects workflow evidence, identifies costly failure modes, proposes a repo-specific Agentic System, waits for file-plan approval, then generates approved agents, skills, templates, gates, and validation notes. Use it by naming the target repository, preferred agent platform if known, and any workflow risks you already care about.
+- `bootstrap-agentic-system`: choose this when a repository does not yet have a deliberate agent workflow, or when an existing setup is informal enough that it should be redesigned from first principles. The skill inspects workflow evidence, identifies costly failure modes, proposes a repo-specific Agentic System, waits for file-plan approval, then generates approved agents, skills, templates, gates, and validation notes. Use it by naming the target repository, selected agent environments if known (one or more), and any workflow risks you already care about.
 - `maintain-agentic-system`: choose this when a repository already has an Agentic System and either a newer Bootstrap release is installed or the codebase, team workflow, validation commands, or knowledge docs have changed. It runs in three modes: `upgrade` pulls in a newer Bootstrap contract, `evolve` follows repository change, and `audit` reports the current state without writing. Every change is a three-way merge per region against the pristine baseline Bootstrap wrote, so an upgrade cannot overwrite a deliberate customization without asking. Use it by naming the repo, the mode, and the changed workflow or pain point.
 - `create-work-item-from-description`: choose this when a user wants to create a bug or user story through a configured tracker/MCP adapter or as a local Markdown record. It returns an ID and never creates a planning session.
 
 All public skills are intentionally scoped to agent-system files: instructions, agents, skills, prompts, governance docs, knowledge docs, artifact templates, and session workflows. They do not modify application code, database schema, runtime configuration, or product tests unless a future repo-local system explicitly adds that behavior after approval.
+
+Bootstrap offers GitHub Copilot in VS Code, Claude Code, Codex, OpenCode, Cursor, and Other with user-entered names. It researches native formats and tools only for selected environments and records compatibility evidence for Maintainer. Canonical agents, skills, and instructions remain exact outside approved placeholders and tooling substitutions; native registration uses separate verified adapters when needed. Installed files are reported separately from verified runtime behavior.
 
 ## Which Skill Should I Pick?
 

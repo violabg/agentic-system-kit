@@ -4,11 +4,26 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `4.1.0`
-- `maintain-agentic-system`: `2.1.0`
+- `bootstrap-agentic-system`: `5.0.0`
+- `maintain-agentic-system`: `3.0.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-09-18
+
+### `bootstrap-agentic-system` 5.0.0
+
+- Select one or more target environments: GitHub Copilot in VS Code, Claude Code, Codex, OpenCode, Cursor, or user-named Other; the execution host does not select targets.
+- Discover formats, loading rules, permissions, and exact tools from selected-client documentation and runtime evidence instead of shipping platform tool defaults.
+- Preserve complete canonical copies outside declared placeholders and tooling slots; separate native registration adapters must load the full instructions without rewriting workflow content.
+- Add version-2 environment/role/operation provenance, shared-file ownership, compatibility status, and a hashed preservation plan with a dependency-free verifier.
+
+### `maintain-agentic-system` 3.0.0
+
+- Reuse Bootstrap's compatibility contract to assess selected environments and platform changes without assuming the latest client or installing unselected platforms.
+- Migrate singular version-1 answers without losing roots, per-file decisions, or baselines; keep unavailable evidence explicitly unverified.
+- Merge native adapters by configuration keys and preserve canonical copies mechanically; legacy non-slot overrides remain visible conflicts and cannot be silently certified as compliant.
 
 ## 2026-09-17
 

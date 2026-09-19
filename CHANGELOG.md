@@ -4,11 +4,17 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `5.0.0`
+- `bootstrap-agentic-system`: `5.1.0`
 - `maintain-agentic-system`: `3.0.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-09-19
+
+### `bootstrap-agentic-system` 5.1.0
+
+- Expanded the implementation-plan schema mirror with explicit template anchors, flush-left code and diff formatting guidance, localized no-logic diff coverage, branch-complete coverage scenarios, nested method-detail guidance, and authoritative example rules.
 
 ## 2026-09-18
 

@@ -24,7 +24,11 @@ capabilities:
   - id: repository-search
     essential: true
     why: Bounded discovery of code, symbols, and call sites under a search budget.
-    fallback: Ask the user for the exact search tool name and record it in the manifest before generating agents.
+    fallback: >-
+      Use available native workspace file/path and text search (or equivalent local code search)
+      to find candidate areas, actual filenames, and observed terms within the same search budget.
+      Record the commands or tools and evidence in the manifest. Do not require cluster metadata,
+      a repository-search MCP, or an invented cluster/term; block only if even local search cannot run.
 
   - id: file-editing
     essential: true
@@ -57,7 +61,11 @@ capabilities:
   - id: visual-evidence
     essential: false
     why: Screenshot, mockup, and UI evidence review for visual planning and testing.
-    fallback: Skip the visual-evidence agent and record the omission in the manifest.
+    fallback: >-
+      For selected image-dependent work, obtain the image bytes via an authorized URL fetch
+      or a local copy and inspect them with an approved image-capable tool. Private issue
+      attachments require working repository permissions. If the image cannot be read,
+      request the image from the user; never infer visual content from a URL alone.
 
   - id: subagent-delegation
     essential: false

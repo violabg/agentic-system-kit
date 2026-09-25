@@ -4,7 +4,14 @@ Install-safe release history for the `bootstrap-agentic-system` skill. Bootstrap
 
 ## Current Version
 
-- `5.1.0`
+- `5.2.0`
+
+## 2026-09-25
+
+### 5.2.0
+
+- Permit bounded workspace file/path and text search in every role needing repository discovery when cluster-aware search is absent; Planner and Direct Implementor no longer stop at Gate 5 for missing cluster metadata.
+- Verify that selected visual roles can fetch and inspect remote issue images with effective repository permissions, or request the inaccessible image from the user.
 
 ## 2026-09-19
 

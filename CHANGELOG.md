@@ -4,11 +4,18 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `5.1.0`
+- `bootstrap-agentic-system`: `5.2.0`
 - `maintain-agentic-system`: `3.0.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-09-25
+
+### `bootstrap-agentic-system` 5.2.0
+
+- Bind repository search to bounded native workspace file/path and text search when cluster-aware tools are unavailable, including Planner and Direct Implementor Gate 5.
+- Discover and verify authorized retrieval and inspection of remote issue images for selected visual roles, including private repository attachments.
 
 ## 2026-09-19
 

@@ -4,11 +4,19 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `5.2.0`
+- `bootstrap-agentic-system`: `5.3.0`
 - `maintain-agentic-system`: `3.0.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-09-27
+
+### `bootstrap-agentic-system` 5.3.0
+
+- Discover Ask and Knowledge Builder bindings from explicit per-role capability evidence, retaining each role's workflow restrictions.
+- Recommend `gpt-5.6-luna-pro` for Vision when supported by the selected environment; retain explicit model choice or approved platform-default omission.
+- Align bug and user-story planning mirrors with portable evidence-gathering invocation while preserving approved delegated or inline execution.
 
 ## 2026-09-25
 

@@ -4,11 +4,19 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `5.3.0`
+- `bootstrap-agentic-system`: `6.0.0`
 - `maintain-agentic-system`: `3.0.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-10-07
+
+### `bootstrap-agentic-system` 6.0.0
+
+- Bug intake now stores only title, description, images, and comments; explicitly linked issue evidence remains separate. Upgrades must review consumers of the previous six-field bug artifact.
+- Planning adapters return Markdown with code blocks and image URLs preserved. User-story intake resolves every listed related ID's title through an approved batch retrieval operation before storing its six-field artifact.
+- Discover role-specific index-rebuild and wiki catalog/page bindings alongside single-item, comment, and batch tracker reads; retain body restrictions, approved source boundaries, and delegated or inline execution.
 
 ## 2026-09-27
 

@@ -4,11 +4,24 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `6.0.0`
-- `maintain-agentic-system`: `3.0.0`
+- `bootstrap-agentic-system`: `6.1.0`
+- `maintain-agentic-system`: `3.1.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-10-08
+
+### `bootstrap-agentic-system` 6.1.0
+
+- Isolate client tool identifiers, invocation syntax and loaded bindings by selected environment; shared workflows must stay neutral instead of combining client alternatives.
+- Verify default-delegate invocation against the intended client's schema and registrations; never infer a named agent or selector from a generic role description.
+- Prefer one discoverable complete skill source when loading and resources work for all consumers; require evidence for extra runtime copies or adapters.
+- Add a discovery-derived static runtime audit for foreign bindings, named delegate selectors, loaded-file ownership and inventory coverage, alongside native verification.
+
+### `maintain-agentic-system` 3.1.0
+
+- Audit existing substitutions and loaded dependencies using Bootstrap's shared isolation contract even when they match the original baseline; propose only demonstrated violations and justified skill consolidation.
 
 ## 2026-10-07
 

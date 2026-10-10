@@ -4,11 +4,28 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `6.1.0`
-- `maintain-agentic-system`: `3.1.0`
+- `bootstrap-agentic-system`: `7.0.0`
+- `maintain-agentic-system`: `3.2.0`
 - `create-work-item-from-description`: `1.0.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-10-10
+
+### `bootstrap-agentic-system` 7.0.0
+
+- Create project-root `knowledge/` for project knowledge and isolate Bootstrap/Maintainer records and resources in `.agentic-system-maintenance/` or an approved separate top-level root. Runtime schemas and bindings remain outside that area.
+- Exclude maintenance locations and aliases before ordinary reading, search, indexing, retrieval, and delegation; native maintenance entrypoints load complete resources only after explicit invocation.
+- Require per-client/provider documentation for MCP transport, registration scope, secure authentication, login/reload, credential references, and effective role permissions. Distinguish configured, authenticated, and verified operations without storing secrets.
+- Ship a context boundary verifier for approved inventories, actual knowledge-index entries, physical paths, and guarded references. Native loading/search checks remain required.
+- Define legacy mixed-layout migration that retains pristine merge inputs, updates path-keyed decisions/references together, and avoids recursive baseline snapshots.
+
+This major release changes required target paths and ordinary-context access. Existing installations migrate through explicit maintenance.
+
+### `maintain-agentic-system` 3.2.0
+
+- Discover dedicated maintenance records while retaining legacy locations as merge inputs; use Bootstrap's shared context-boundary contract to split mixed layouts after approval.
+- Preserve customizations and baseline identity during relocation, repair references and audit plans together, and leave unresolved isolation/authentication evidence visible.
 
 ## 2026-10-08
 

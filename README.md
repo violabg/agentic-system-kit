@@ -12,6 +12,10 @@ All public skills are intentionally scoped to agent-system files: instructions, 
 
 Bootstrap offers GitHub Copilot in VS Code, Claude Code, Codex, OpenCode, Cursor, and Other with user-entered names. It researches native formats and tools only for selected environments and records compatibility evidence for Maintainer. Canonical agents, skills, and instructions remain exact outside approved placeholders and tooling substitutions; native registration uses separate verified adapters when needed. Installed files are reported separately from verified runtime behavior.
 
+Project knowledge starts at root `knowledge/knowledge-index.md`. Installation and maintenance records, resources, baselines, and compatibility/authentication evidence live in `.agentic-system-maintenance/` or an approved dedicated top-level root. Ordinary questions and workflows exclude this area before search or loading; explicit agent-system maintenance activates it. Existing mixed layouts migrate through Maintainer with their customizations and pristine baselines preserved. Runtime schemas and native bindings stay in active runtime locations.
+
+For each selected client and integration, Bootstrap researches official registration and authentication documentation, records non-secret setup prerequisites, and verifies effective role operations separately from configuration. Native discovery/loading checks must prove maintenance entrypoints stay inactive during ordinary requests; a hidden folder alone does not establish isolation.
+
 ## Which Skill Should I Pick?
 
 Use `bootstrap-agentic-system` when you are creating the system: new repo, no clear gates, no durable planner/implementor/tester roles, no knowledge index, or a prompt collection that should become a coherent workflow.
@@ -32,7 +36,7 @@ When a public skill changes, increase that skill's version in the changelog befo
 
 Each public skill that has version-sensitive maintenance behavior should also ship a skill-local `CHANGELOG.md` inside its own skill folder. Those skill-local changelogs are the install-safe provenance files that travel with `npx skills add`.
 
-Bootstrap-generated systems record their current applied contract version in a repo-local agentic-system manifest, normally `docs/agents/agentic-system-manifest.md`, and keep a repo-local snapshot of the installed Bootstrap skill changelog. The snapshot is the release-history ledger. The manifest is the repository's current-state ledger. Bootstrap reads the installed Bootstrap skill changelog once during setup, copies it into the generated system, and initializes the manifest. Maintainer compares that repo-local snapshot against the currently installed Bootstrap skill changelog, cross-checks the actual repository files before proposing any gap-filling updates, and then refreshes both the repo-local snapshot and the manifest to the new current baseline after approved maintenance succeeds.
+Bootstrap-generated systems record their current applied contract version in a repo-local agentic-system manifest, normally `.agentic-system-maintenance/agentic-system-manifest.md`, and keep a repo-local snapshot of the installed Bootstrap skill changelog. The snapshot is the release-history ledger. The manifest is the repository's current-state ledger. Bootstrap reads the installed Bootstrap skill changelog once during setup, copies it into the generated system, and initializes the manifest. Maintainer compares that repo-local snapshot against the currently installed Bootstrap skill changelog, cross-checks the actual repository files before proposing any gap-filling updates, and then refreshes both the repo-local snapshot and the manifest to the new current baseline after approved maintenance succeeds.
 
 ## Install
 

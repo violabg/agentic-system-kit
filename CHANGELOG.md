@@ -4,13 +4,21 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `7.0.1`
+- `bootstrap-agentic-system`: `7.1.0`
 - `maintain-agentic-system`: `3.2.1`
-- `create-work-item-from-description`: `1.0.0`
+- `create-work-item-from-description`: `1.1.0`
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
 
 ## 2026-10-10
+
+### `create-work-item-from-description` 1.1.0
+
+- Run only after explicit invocation, clarify and approve the full proposal, and create only through an authorized issue-creation tool in the active client; remove local-record fallback.
+
+### `bootstrap-agentic-system` 7.1.0
+
+- Add a target root-instructions route for explicit standalone work-item creation, bypassing normal agent and Planner routing while requiring clarification, proposal approval, and an authorized active-client issue-creation tool.
 
 ### `bootstrap-agentic-system` 7.0.1
 

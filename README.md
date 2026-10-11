@@ -6,7 +6,6 @@
 
 - `bootstrap-agentic-system`: choose this when a repository does not yet have a deliberate agent workflow, or when an existing setup is informal enough that it should be redesigned from first principles. The skill inspects workflow evidence, identifies costly failure modes, proposes a repo-specific Agentic System, waits for file-plan approval, then generates approved agents, skills, templates, gates, and validation notes. Use it by naming the target repository, selected agent environments if known (one or more), and any workflow risks you already care about.
 - `maintain-agentic-system`: choose this when a repository already has an Agentic System and either a newer Bootstrap release is installed or the codebase, team workflow, validation commands, or knowledge docs have changed. It runs in three modes: `upgrade` pulls in a newer Bootstrap contract, `evolve` follows repository change, and `audit` reports the current state without writing. Every change is a three-way merge per region against the pristine baseline Bootstrap wrote, so an upgrade cannot overwrite a deliberate customization without asking. Use it by naming the repo, the mode, and the changed workflow or pain point.
-- `create-work-item-from-description`: choose this when a user wants to create a bug or user story through a configured tracker/MCP adapter or as a local Markdown record. It returns an ID and never creates a planning session.
 
 All public skills are intentionally scoped to agent-system files: instructions, agents, skills, prompts, governance docs, knowledge docs, artifact templates, and session workflows. They do not modify application code, database schema, runtime configuration, or product tests unless a future repo-local system explicitly adds that behavior after approval.
 
@@ -44,7 +43,7 @@ Bootstrap-generated systems record their current applied contract version in a r
 npx skills add violabg/agentic-system-kit
 ```
 
-The package keeps skills under grouped paths such as `skills/agentic-system/bootstrap-agentic-system` and `skills/work-items/create-work-item-from-description`.
+The package keeps skills under grouped paths such as `skills/agentic-system/bootstrap-agentic-system` and `skills/agentic-system/maintain-agentic-system`. Work-item creation and editing is not a separate kit skill: Bootstrap generates `manage-work-item` into the target repository, bound to the tracker it approved.
 
 That grouped directory layout lets `npx skills add` offer a parent group choice for installing a whole set at once while still allowing users to expand the group and select individual skills one by one.
 

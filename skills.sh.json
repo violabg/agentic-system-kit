@@ -9,13 +9,6 @@
         "bootstrap-agentic-system",
         "maintain-agentic-system"
       ]
-    },
-    {
-      "title": "Work Items",
-      "description": "Create tracker-backed or local work items.",
-      "skills": [
-        "create-work-item-from-description"
-      ]
     }
   ]
 }

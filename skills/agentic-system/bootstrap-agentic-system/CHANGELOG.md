@@ -4,9 +4,17 @@ Install-safe release history for the `bootstrap-agentic-system` skill. Bootstrap
 
 ## Current Version
 
-- `9.0.0`
+- `9.2.0`
 
 ## 2026-10-13
+
+### 9.2.0
+
+- Deliver Planner clarification batches through the environment's verified question tool when one exists. Each question keeps its full per-question text in chat, and its answer choices appear as selectable options in a single question-tool call, with free-text Other still available. Environments without a question tool receive the batch in chat only.
+
+### 9.1.0
+
+- Ask all blocking Planner clarification questions together in one message, ordered by impact and each in the per-question format, instead of one at a time. The Planner waits for every answer before resuming. If those answers leave new blocking questions, they are asked together in one further message. The same batching applies to the clarifications in the generated `plan-user-story-from-id` and `plan-bug-from-id` flows.
 
 ### 9.0.0
 

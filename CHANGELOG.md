@@ -4,7 +4,7 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `9.0.0`
+- `bootstrap-agentic-system`: `9.2.0`
 - `maintain-agentic-system`: `3.4.0`
 
 Removed in 2026-10-11: `create-work-item-from-description` (last version `1.1.0`). Bootstrap now generates `manage-work-item` into the target repository, bound to the tracker tools it approved, with create and read-before-update modes.
@@ -12,6 +12,14 @@ Removed in 2026-10-11: `create-work-item-from-description` (last version `1.1.0`
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
 
 ## 2026-10-13
+
+### `bootstrap-agentic-system` 9.2.0
+
+- Deliver Planner clarification batches through the environment's verified question tool when one exists. Each question keeps its full per-question text in chat, and its answer choices appear as selectable options in a single question-tool call, with free-text Other still available. Environments without a question tool receive the batch in chat only.
+
+### `bootstrap-agentic-system` 9.1.0
+
+- Ask all blocking Planner clarification questions together in one message, ordered by impact and each in the per-question format, instead of one at a time. The Planner waits for every answer before resuming. If those answers leave new blocking questions, they are asked together in one further message. The same batching applies to the clarifications in the generated `plan-user-story-from-id` and `plan-bug-from-id` flows.
 
 ### `bootstrap-agentic-system` 9.0.0
 

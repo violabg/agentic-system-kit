@@ -433,7 +433,7 @@ Absolute rules: no `file:line` without a logged search. No user interview until 
 <!-- CANONICAL-TEMPLATE-SLOT: PLANNER_CLARIFICATION_WORKFLOW START replaces=sha256:d8c751620cd766f3 lines=3 -->
 ## Gate 7 - Structured Interview
 
-Ask the user only when a genuine blocking clarification remains: evidence leaves a material planning decision unresolved and resolving it changes the implementation plan. Ask one evidence-backed clarification at a time, record the answer and its plan impact, then resume the required gates. Do not request plan approval until every blocking clarification is resolved.
+Ask the user only when a genuine blocking clarification remains: evidence leaves a material planning decision unresolved and resolving it changes the implementation plan. Ask all blocking clarifications together in one message, ordered by impact, each in the per-question format below. Then collect every answer in one `{{QUESTION_TOOL}}` call: one question per entry, each with its answer choices as selectable options, and free-text Other available. If `{{QUESTION_TOOL}}` is unavailable in this environment, ask the same batch in chat only. Wait for every answer, record each answer and its plan impact, then resume the required gates. If the answers leave new blocking clarifications, ask those together in one further batch using the same delivery. Do not request plan approval until every blocking clarification is resolved.
 
 When no blocking clarification remains, skip this gate. Complete all mandatory gates, artifacts, and implementation plan uninterrupted. Do not pause to ask permission to continue, begin a gate, create an artifact, or draft the plan.
 

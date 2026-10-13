@@ -4,12 +4,27 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `8.0.0`
-- `maintain-agentic-system`: `3.3.0`
+- `bootstrap-agentic-system`: `9.0.0`
+- `maintain-agentic-system`: `3.4.0`
 
 Removed in 2026-10-11: `create-work-item-from-description` (last version `1.1.0`). Bootstrap now generates `manage-work-item` into the target repository, bound to the tracker tools it approved, with create and read-before-update modes.
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-10-13
+
+### `bootstrap-agentic-system` 9.0.0
+
+- Remove the Vision role. Generated systems no longer include a Vision agent, its model choice, or Planner and Direct Implementor delegation to it; the `VISION_AGENT_NAME`, `VISION_MODEL`, `VISION_INVOCATION`, `VISUAL_ARTIFACT_FORMAT`, and `VISUAL_ARTIFACT_STORAGE` slots are gone. Planner and Direct Implementor inspect images themselves through the new `IMAGE_INSPECTION` slot, may hand an image to a default subagent on an explicitly approved cheaper vision-capable model, and record one Markdown visual-evidence session artifact per image so Implementor can use the findings with fresh context.
+- Run every user-invokable role as the main conversation of its session, never as a delegated subagent. A new `role-selection` capability and a Role Entrypoints section in the compatibility contract give each selected environment a verified way to start each role: the client's own main-session selection where it exists, otherwise a user-only role-entry adapter that loads the complete role, with its tool limits recorded as instruction-only.
+- Make `plan-user-story-from-id` and `plan-bug-from-id` activate the Planner through a new `ROLE_ACTIVATION` slot, so one explicit invocation works from a fresh session on clients without an agent picker.
+- Replace the Planner's generic "invoke implementor" instruction with a `ROLE_HANDOFF` slot that prints the exact step for the consuming environment to start Implementor in a new conversation with the Planning Session ID.
+- Generate user guides under a new `CLIENT_GUIDE_ROOT` (default `docs/agentic-system/`): an index plus one guide per selected environment covering role start methods, common flows, the handoff, and enforcement limits. Root instructions link the index, and the final handoff links every guide. The generated-system blueprint and file plan gain a Client Guides batch in place of the Vision batch.
+
+### `maintain-agentic-system` 3.4.0
+
+- Classify a generated Vision agent, its native registration, its `VISION_*` and visual-artifact slot values, and Planner or Direct Implementor delegation to it as retired components that require update. Propose removing them with approval and re-resolving image handling as `IMAGE_INSPECTION`; session visual artifacts stay untouched.
+- Resolve the new role entrypoints, Planner handoff step, and client guides for the recorded environments, and regenerate affected client guides whenever an environment, role, entrypoint, or handoff step changes.
 
 ## 2026-10-11
 

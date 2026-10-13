@@ -6,6 +6,10 @@ disable-model-invocation: true
 
 # Plan User Story From Id
 
+<!-- CANONICAL-TEMPLATE-SLOT: ROLE_ACTIVATION START replaces=none -->
+## Required Role
+This skill runs only under the Planner role, as the main conversation. {{ROLE_ACTIVATION}}
+<!-- CANONICAL-TEMPLATE-SLOT: ROLE_ACTIVATION END -->
 <!-- CANONICAL-TEMPLATE-SLOT: MAINTENANCE_ROOT START replaces=none -->
 ## Repository Context Boundary
 - Exclude `{{MAINTENANCE_ROOT}}` and installed Bootstrap/Maintainer bodies, resources, and aliases before ordinary search, discovery, knowledge loading, or delegation. They are accessible only during initial Bootstrap or explicitly requested agent-system maintenance.

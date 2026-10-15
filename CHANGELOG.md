@@ -4,12 +4,22 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `9.3.0`
-- `maintain-agentic-system`: `3.5.0`
+- `bootstrap-agentic-system`: `9.4.0`
+- `maintain-agentic-system`: `3.6.0`
 
 Removed in 2026-10-11: `create-work-item-from-description` (last version `1.1.0`). Bootstrap now generates `manage-work-item` into the target repository, bound to the tracker tools it approved, with create and read-before-update modes.
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-10-15
+
+### `bootstrap-agentic-system` 9.4.0
+
+- Record each role-entry route's effective tool list per client surface, not only its enforcement. A session started through a fallback adapter can lack tools that the native registration grants, for example workspace search tools that only an agent start option adds. Every operation a role is bound to must be available on every route that starts it; otherwise Bootstrap binds an approved route-specific alternative in `CAPABILITY_BINDINGS` with the same operation, scope, and exclusions, or blocks the role on that route. An alternative that gives a role a tool it does not otherwise have, such as a shell for a read-only role, is an explicit user decision. Entrypoint verification now exercises each essential bound operation per role, route, and surface instead of stopping at the role's first gate; a route that cannot be exercised is compared against the tool list the host session exposes, with every gap recorded. The contract audit checks that every route's tool list covers its roles' bound operations or records an approved alternative or block.
+
+### `maintain-agentic-system` 3.6.0
+
+- Treat a change in a selected client's version as a trigger to re-check each role-entry route's tool list per surface. An existing dual route with no per-route tool list recorded is `unknown` until verified, and a route that no longer covers an operation its role is bound to is `requires update`, resolved by a route-specific binding or a block on that route.
 
 ## 2026-10-14
 

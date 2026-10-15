@@ -4,12 +4,22 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `9.2.0`
-- `maintain-agentic-system`: `3.4.0`
+- `bootstrap-agentic-system`: `9.3.0`
+- `maintain-agentic-system`: `3.5.0`
 
 Removed in 2026-10-11: `create-work-item-from-description` (last version `1.1.0`). Bootstrap now generates `manage-work-item` into the target repository, bound to the tracker tools it approved, with create and read-before-update modes.
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
+
+## 2026-10-14
+
+### `bootstrap-agentic-system` 9.3.0
+
+- Offer a dual role route beside native main-session selection. For Claude Code, Bootstrap asks during environment intake whether the team uses the VS Code extension. Only a yes leads to the offer; otherwise roles use native selection alone and no fallback adapter is generated. For other environments, Bootstrap makes the offer when evidence shows native selection does not cover every surface the team uses, or when a team using several surfaces runs roles that cannot tell which one they are on. If the user accepts, Bootstrap adds a role-entry adapter beside native selection, for every role or only some. Native selection stays the primary route and enforces tool limits. The fallback adapter has its own name, refuses to start inside a conversation that already runs a role, and loads the complete role without restating its rules. Role-bound skills accept either route, and the Planner handoff and client guides show both start steps, labeled by enforcement.
+
+### `maintain-agentic-system` 3.5.0
+
+- Check role-entry adapters that a repository already added next to native role selection as a customization against the new dual-route rules. Conforming adapters can move from the customization register into the recorded role entrypoints, with approval. Adapters that restate role rules or do not refuse to start inside a running role are classified `requires update`.
 
 ## 2026-10-13
 

@@ -4,14 +4,23 @@ This package tracks public skill versions here instead of in `SKILL.md` frontmat
 
 ## Current Skill Versions
 
-- `bootstrap-agentic-system`: `9.4.0`
-- `maintain-agentic-system`: `3.6.0`
+- `bootstrap-agentic-system`: `10.0.0`
+- `maintain-agentic-system`: `4.0.0`
 
 Removed in 2026-10-11: `create-work-item-from-description` (last version `1.1.0`). Bootstrap now generates `manage-work-item` into the target repository, bound to the tracker tools it approved, with create and read-before-update modes.
 
 Removed in 2026-07-29: `create-work-item-planning-skills`. Bootstrap installs `plan-bug-from-id` and `plan-user-story-from-id` directly, and the installed `author-repo-skill` covers reworking them.
 
 ## 2026-10-15
+
+### `bootstrap-agentic-system` 10.0.0
+
+- Breaking: each selected environment now gets exactly one role route, and the dual route is removed, including the Claude Code VS Code extension question. Clients whose native agent picker works on every surface the team uses keep native role agents. Other clients, such as Claude Code and Codex, use the skill route: Bootstrap generates no custom agents for user-invokable roles, binds every tool and integration the roles need once for the whole environment, and starts each role through a skill the user invokes by hand. Planner starts only through `plan-bug-from-id` and `plan-user-story-from-id`, which load the complete Planner role first; every other role gets one skill named with the approved agent prefix, for example `shop-implementor`. Role and role-bound skills refuse to start inside a conversation that already runs a role, are not model-invocable where the client can prevent it, and record their tool limits as instruction-only. The Planner handoff names the prefixed Implementor skill on that route. The shipped file-plan and blueprint templates record one route per environment, the skill-route start methods and environment-level bindings, and list role skills in the target layout in place of role-entry adapters.
+- Bootstrap and maintenance run outside agent role routing, in the client's default session, and stop when invoked inside a conversation that runs a generated role. Generated root instructions now say so next to the `manage-work-item` exception.
+
+### `maintain-agentic-system` 4.0.0
+
+- Breaking: an environment recorded with two role routes, or with fallback adapters added as a customization, is `requires update`. Maintainer re-decides that environment's single route and proposes the migration as one approved change: for the skill route, remove native user-invokable role registrations and fallback adapters, generate the prefixed role skills, regenerate planning-skill activation, environment-level bindings, handoff, and client guides; for the native route, remove the fallback adapters.
 
 ### `bootstrap-agentic-system` 9.4.0
 

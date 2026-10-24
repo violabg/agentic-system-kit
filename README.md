@@ -1,41 +1,11 @@
 # agentic-system-kit
 
-`agentic-system-kit` is a public skills.sh package for bootstrapping and maintaining repository-local Agentic Systems.
+Skills that install and maintain a repository-local agentic system for AI coding clients. The kit holds two independent systems. Pick one per repository.
 
-## Skills
-
-- `bootstrap-agentic-system`: choose this when a repository does not yet have a deliberate agent workflow, or when an existing setup is informal enough that it should be redesigned from first principles. The skill inspects workflow evidence, identifies costly failure modes, proposes a repo-specific Agentic System, waits for file-plan approval, then generates approved agents, skills, templates, gates, and validation notes. Use it by naming the target repository, selected agent environments if known (one or more), and any workflow risks you already care about.
-- `maintain-agentic-system`: choose this when a repository already has an Agentic System and either a newer Bootstrap release is installed or the codebase, team workflow, validation commands, or knowledge docs have changed. It runs in three modes: `upgrade` pulls in a newer Bootstrap contract, `evolve` follows repository change, and `audit` reports the current state without writing. Every change is a three-way merge per region against the pristine baseline Bootstrap wrote, so an upgrade cannot overwrite a deliberate customization without asking. Use it by naming the repo, the mode, and the changed workflow or pain point.
-
-All public skills are intentionally scoped to agent-system files: instructions, agents, skills, prompts, governance docs, knowledge docs, artifact templates, and session workflows. They do not modify application code, database schema, runtime configuration, or product tests unless a future repo-local system explicitly adds that behavior after approval.
-
-Bootstrap offers GitHub Copilot in VS Code, Claude Code, Codex, OpenCode, Cursor, and Other with user-entered names. It researches native formats and tools only for selected environments and records compatibility evidence for Maintainer. Canonical agents, skills, and instructions remain exact outside approved placeholders and tooling substitutions; native registration uses separate verified adapters when needed. Installed files are reported separately from verified runtime behavior.
-
-Project knowledge starts at root `knowledge/knowledge-index.md`. Installation and maintenance records, resources, baselines, and compatibility/authentication evidence live in `.agentic-system-maintenance/` or an approved dedicated top-level root. Ordinary questions and workflows exclude this area before search or loading; explicit agent-system maintenance activates it. Existing mixed layouts migrate through Maintainer with their customizations and pristine baselines preserved. Runtime schemas and native bindings stay in active runtime locations.
-
-For each selected client and integration, Bootstrap researches official registration and authentication documentation, records non-secret setup prerequisites, and verifies effective role operations separately from configuration. Native discovery/loading checks must prove maintenance entrypoints stay inactive during ordinary requests; a hidden folder alone does not establish isolation.
-
-## Which Skill Should I Pick?
-
-Use `bootstrap-agentic-system` when you are creating the system: new repo, no clear gates, no durable planner/implementor/tester roles, no knowledge index, or a prompt collection that should become a coherent workflow.
-
-Use `maintain-agentic-system` when the system exists and needs to move: a newer Bootstrap release to absorb, stale instructions, missing validation commands, outdated knowledge docs, weak approval gates, a changed issue workflow, or agent roles that no longer match how the repo works.
-
-## Versioning
-
-Skill versions live in [CHANGELOG.md](CHANGELOG.md), not in `SKILL.md` frontmatter. VS Code validates skill frontmatter for supported discovery fields, and unsupported metadata such as `version` can produce warnings. Keep `SKILL.md` frontmatter focused on fields the agent uses to find and run the skill, such as `name`, `description`, `argument-hint`, and `disable-model-invocation`.
-
-Each public skill follows Semantic Versioning.
-
-- Patch: wording fixes, clarifications, or compatible behavior fixes.
-- Minor: backward-compatible capabilities, gates, templates, or validation improvements.
-- Major: contract changes, removed behavior, renamed outputs, or breaking workflow changes.
-
-When a public skill changes, increase that skill's version in the changelog before exporting to `agentic-system-kit`. The `Current Skill Versions` section in the package changelog is the package-wide release ledger used by the package checks.
-
-Each public skill that has version-sensitive maintenance behavior should also ship a skill-local `CHANGELOG.md` inside its own skill folder. Those skill-local changelogs are the install-safe provenance files that travel with `npx skills add`.
-
-Bootstrap-generated systems record their current applied contract version in a repo-local agentic-system manifest, normally `.agentic-system-maintenance/agentic-system-manifest.md`, and keep a repo-local snapshot of the installed Bootstrap skill changelog. The snapshot is the release-history ledger. The manifest is the repository's current-state ledger. Bootstrap reads the installed Bootstrap skill changelog once during setup, copies it into the generated system, and initializes the manifest. Maintainer compares that repo-local snapshot against the currently installed Bootstrap skill changelog, cross-checks the actual repository files before proposing any gap-filling updates, and then refreshes both the repo-local snapshot and the manifest to the new current baseline after approved maintenance succeeds.
+| System | Skills | State |
+| --- | --- | --- |
+| **Orchestrator system** | `bootstrap-orchestrator-system`, `maintain-orchestrator-system` | current |
+| Planner/Implementor system (legacy) | `bootstrap-agentic-system`, `maintain-agentic-system` | frozen: still installable, no longer developed |
 
 ## Install
 
@@ -43,10 +13,33 @@ Bootstrap-generated systems record their current applied contract version in a r
 npx skills add violabg/agentic-system-kit
 ```
 
-The package keeps skills under grouped paths such as `skills/agentic-system/bootstrap-agentic-system` and `skills/agentic-system/maintain-agentic-system`. Work-item creation and editing is not a separate kit skill: Bootstrap generates `manage-work-item` into the target repository, bound to the tracker it approved.
+The skills CLI offers two groups: **Agentic System — orchestrator** and **Agentic System — legacy**. Pick the group of the system you want, or expand a group to pick single skills. To choose without the prompt:
 
-That grouped directory layout lets `npx skills add` offer a parent group choice for installing a whole set at once while still allowing users to expand the group and select individual skills one by one.
+```sh
+npx skills add violabg/agentic-system-kit --skill bootstrap-orchestrator-system --skill maintain-orchestrator-system
+```
 
-Prompted selection during `npx skills add` is still controlled by the `skills` CLI and the environment where it runs. If the CLI detects a host agent session, it may switch to non-interactive installation and install all discovered skills automatically.
+When the CLI runs inside an agent session it may install every skill without asking; run it from a normal shell to choose.
 
-If you want explicit selection today, use CLI flags such as `--list`, `--skill`, and `--agent`, or run the command from a normal shell outside an auto-detected agent session.
+## Orchestrator system
+
+One **orchestrator** role drives the workflow the developer chooses:
+
+- `DESIGN`: a structured design the developer reviews and approves in a review document, then implementation and verification.
+- `FAST_IMPLEMENTATION`: a quick path for simple or mechanical changes.
+- `DOCUMENTATION`: a guide written from a template, then reviewed.
+
+A local Node runtime serves the workflow one instruction at a time and owns the session store, the design, the mechanical checks and the approval gate. The orchestrator never writes production code: it hands the code and the verifications to delegates (code implementor, design verifier, implementation verifier, documentation reviewer), each running in its own context. Two more roles answer project questions (`ask`) and build the project knowledge (`knowledge-builder`).
+
+- **`bootstrap-orchestrator-system`** installs the system. It asks which clients the team uses (Claude Code, Codex, GitHub Copilot in VS Code, OpenCode, Cursor, or another), where sessions should live (inside the repository and ignored by git, or outside it), and how the tracker and other integrations are reached. It then renders every file with a deterministic installer, merges client settings without losing existing ones, and verifies each client.
+- **`maintain-orchestrator-system`** upgrades an installation to a newer kit, applies changed decisions, or audits the installation. It merges the files the repository customized instead of overwriting them.
+
+Both skills change only agent-system files: role files, skills, routers, the runtime and its config, workflows, contracts, client settings for the runtime command, guides and the installation records. They never touch application code.
+
+## Legacy: Planner/Implementor system
+
+`bootstrap-agentic-system` and `maintain-agentic-system` install and maintain the earlier system built around Planner, Implementor and Integration Tester roles with gates written in the role bodies. They remain available unchanged for repositories that use them. They receive no new features. A repository moving to the orchestrator system installs it with `bootstrap-orchestrator-system`. This is a new installation, not an upgrade of the legacy one.
+
+## Versions
+
+Each skill keeps its version in the `CHANGELOG.md` inside its own folder, which travels with the installed skill. The orchestrator installer records the kit version it installed in the target repository's manifest; the maintainer compares it with the installed kit.

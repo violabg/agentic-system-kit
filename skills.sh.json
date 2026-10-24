@@ -3,8 +3,16 @@
   "notGrouped": "bottom",
   "groupings": [
     {
-      "title": "Agentic System",
-      "description": "Bootstrap and maintain repository-local agent workflows.",
+      "title": "Agentic System — orchestrator",
+      "description": "Install and maintain the orchestrator agentic system: served DESIGN, FAST_IMPLEMENTATION and DOCUMENTATION workflows, a local runtime and delegates with their own context.",
+      "skills": [
+        "bootstrap-orchestrator-system",
+        "maintain-orchestrator-system"
+      ]
+    },
+    {
+      "title": "Agentic System — legacy",
+      "description": "The earlier Planner/Implementor system, frozen: still installable, no longer developed.",
       "skills": [
         "bootstrap-agentic-system",
         "maintain-agentic-system"

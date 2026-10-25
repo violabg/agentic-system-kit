@@ -41,7 +41,7 @@ export function render(kit, answers) {
       const lines = ["", "## Bindings", "", `Installed for ${profile.label}. This is how each \`#capability:<token>\` in this file runs here.`, ""];
       const runtimeTokens = tokens.filter((t) => index.tokens[t]?.kind === "runtime");
       if (runtimeTokens.length || role?.operations.includes("runtime")) {
-        lines.push(`- Runtime operations: run \`${runtimeCommand} <token>\` from the repository root, where \`<token>\` is the capability name; pass large payloads with \`--json <file>\`. The runtime is required; when it cannot run, follow the procedure its contract under \`${rt}/contracts/\` gives and record that the gate ran instruction-only.`);
+        lines.push(`- Runtime operations: run \`${runtimeCommand} <token>\` from the repository root, where \`<token>\` is the capability name; pass large payloads with \`--json <file>\`. The JSON payload is the operation's argument object, defined in \`${rt}/contracts/\`: design operations take \`{ "sessionId", "jobId", "request": { ... } }\`, and fields such as \`operation\`, \`rows\` and \`ids\` go inside \`request\`. The runtime is required; when it cannot run, follow the procedure its contract under \`${rt}/contracts/\` gives and record that the gate ran instruction-only.`);
       }
       for (const token of tokens.filter((t) => index.tokens[t]?.kind === "host")) {
         if (token === "delegate") {

@@ -352,7 +352,11 @@ dialog[open] { animation: rise .16s ease-out; }
   const opsOfFile = {};
   path.operations.forEach((op) => list(op.files).forEach((p) => { const f = fileFor(p); if (f) (opsOfFile[f.id] = opsOfFile[f.id] || []).push(op.id); }));
   const decisionsOfOp = {};
-  design.decisions.forEach((d) => list(d.realizedIn).forEach((id) => { (decisionsOfOp[id] = decisionsOfOp[id] || []).push(d.id); }));
+  const opsOfDecision = {};
+  path.operations.forEach((op) => {
+    decisionsOfOp[op.id] = list(op.realizes);
+    list(op.realizes).forEach((id) => { (opsOfDecision[id] = opsOfDecision[id] || []).push(op.id); });
+  });
   const decisionsOfFile = (f) => Array.from(new Set(list(opsOfFile[f.id]).flatMap((op) => list(decisionsOfOp[op])))).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
   function idLink(id) {
@@ -456,13 +460,13 @@ dialog[open] { animation: rise .16s ease-out; }
     const others = options.filter((o) => o !== chosen);
     const option = (o) => '<div class="option"' + (o.id ? ' id="' + esc(o.id) + '"' : "") + '><span class="mono">' + esc(o.id || "") + "</span><div>" + inline(o.text) + "</div></div>";
     const badges = (highlightedDecision(d) ? badge("Highlight", "solid risk") : "") + (d.source ? facet("source", d.source) : "") +
-      (list(d.realizedIn).length ? "" : highlightedDecision(d) ? badge("not realized by code", "dashed") : badge("not realized yet", "warn"));
+      (list(opsOfDecision[d.id]).length ? "" : highlightedDecision(d) ? badge("not realized by code", "dashed") : badge("not realized yet", "warn"));
     return card(d.id, badges, inline(d.topic),
       (d.question ? '<p class="question">' + inline(d.question) + "</p>" : "") +
       spec([["Context", d.context && prose(d.context), true], ["Why it is asked", d.why && prose(d.why), true], ["How the answer is used", d.how && prose(d.how), true]], "flush context") +
       '<div class="answer' + (chosen ? "" : " open") + '"><p class="label">' + (chosen ? "Answer" : "No answer chosen yet") + "</p>" + (chosen ? option(chosen) : "") + "</div>" +
       (others.length ? '<p class="label">Other answers considered</p><div class="others">' + others.map(option).join("") + "</div>" : "") +
-      (list(d.realizedIn).length ? spec([["Realized in", idLinks(d.realizedIn)]]) : ""),
+      (list(opsOfDecision[d.id]).length ? spec([["Realized in", idLinks(opsOfDecision[d.id])]]) : ""),
       highlightedDecision(d) ? "highlight" : "");
   }
   const highlighted = design.decisions.filter(highlightedDecision);
@@ -503,11 +507,11 @@ dialog[open] { animation: rise .16s ease-out; }
   }
   const opsDone = path.operations.filter((o) => o.implementationStatus === "Completed").length;
   const opsImplemented = path.operations.filter((o) => o.implementationStatus === "Implemented").length;
-  stage("plan", "Implementation plan", "How it is built", path.operationsIntro || "The operations an implementor carries out, in order.",
+  stage("plan", "Implementation plan", "How it is built", "The operations an implementor carries out, in order.",
     path.operations.length, "",
     (path.operations.length ? tally([[path.operations.length, "operations"], opsImplemented && [opsImplemented, "implemented, not verified", "warn"], [opsDone, "completed", opsDone === path.operations.length ? "ok" : ""]]) : "") +
     (path.operations.length ? path.operations.map((op) => card(op.id,
-      badge(op.kind, "ref") + (weights[op.id] ? facet("weight", weights[op.id].weight, weights[op.id].authorisation) : "") + statusBadge(op.implementationStatus) + badge("from " + String(op.source || "design").toLowerCase()),
+      badge(op.kind, "ref") + (op.testType ? badge(op.testType) : "") + (weights[op.id] ? facet("weight", weights[op.id].weight, weights[op.id].authorisation) : "") + statusBadge(op.implementationStatus) + badge("from " + String(op.source || "design").toLowerCase()),
       inline(op.operation),
       prose(op.instructions) + edges(op) +
       spec([
@@ -542,7 +546,7 @@ dialog[open] { animation: rise .16s ease-out; }
     }).join("");
   }
   const added = fsFiles.filter((f) => f.status === "Added").length;
-  stage("filesystem", "Filesystem", "Files modified and added", path.filesystem.intro || "The files the design adds or modifies. Open a file to see why it changes.",
+  stage("filesystem", "Filesystem", "Files modified and added", "The files the design adds or modifies. Open a file to see why it changes.",
     fsFiles.length, "",
     fsFiles.length
       ? tally([[fsFiles.length - added, "modified", "warn"], [added, "added", "ok"], [new Set(fsFiles.map((f) => f.module).filter(Boolean)).size, "modules touched"]]) +
@@ -715,7 +719,9 @@ dialog[open] { animation: rise .16s ease-out; }
     ["D#.k", "An option of a decision. Name one by its ID to make it the answer."],
     ["Highlight", "A decision where the developer's judgment is most needed. One about the situation, such as a missing input or process, is not realized by code."],
     ["IM#", "An operation: one ordered step of the implementation plan."],
-    ["Weight", "The class an operation is served in: authoring, external-execution, unit-test, integration-test, verification. Only authoring runs without the developer's authorisation; a dependency always comes first."],
+    ["Operation kind", "What the operation does: Code (production source, wiring included), NotCode (non-source files or no output), Commands (long-running generators or migrations), Testing (unit, integration, E2E or temporary harnesses) or Build (build, error checks and lint)."],
+    ["Testing", "An operation that writes and runs testing code; like Commands, it requires the developer's authorisation."],
+    ["Weight", "The weight class of an operation: authoring, commands, testing or build. It is metadata only: the plan order is the order declared, and a dependency is the only precedence constraint."],
     ["Implemented", "An operation the implementor closed that the verifier has not passed yet. Completed means verified."],
     ["FS#", "A file the design adds (A) or modifies (M). Click a file to see why it changes."],
     ["CT#", "An internal contract: what a module promises, with its signature."],

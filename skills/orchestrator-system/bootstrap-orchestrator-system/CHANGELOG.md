@@ -2,6 +2,16 @@
 
 Versions follow semantic versioning. The installer reads the first version heading as the kit version it records in the target's manifest.
 
+## 3.0.1
+
+The review document is easier to read. Its data, sections and links are unchanged, so a target needs no other change.
+
+- **Header.** It is 58px tall from 1081px wide up, and two rows below that. The metadata stays on one line and truncates, with the full text in a tooltip. `Design` moves from the title into that line.
+- **Reading column.** The column stops at 54rem and running text at about 80 characters per line.
+- **IDs.** They are set in the sans font, so `O1.1` no longer reads as `01.1`.
+- **Contrast and size.** The faintest text now meets AA contrast, and small labels and counts are larger.
+- **Quieter details.** Inline code has no border, the current step of the reading path is filled, and the approval stamp is straight.
+
 ## 3.0.0
 
 The canonical system follows a newer upstream 3.0.1 build. Operation kinds and design requests change, so a target re-installed from this version must re-read its workflows.

@@ -4,7 +4,7 @@ Skills that install and maintain a repository-local agentic system for AI coding
 
 | System | Skills | State |
 | --- | --- | --- |
-| **Orchestrator system** | `bootstrap-orchestrator-system`, `maintain-orchestrator-system` | current |
+| **Orchestrator system** | `bootstrap-orchestrator-system`, `maintain-orchestrator-system`, `improve-orchestrator-system` | current |
 | Planner/Implementor system (legacy) | `bootstrap-agentic-system`, `maintain-agentic-system` | frozen: still installable, no longer developed |
 
 ## Install
@@ -16,7 +16,7 @@ npx skills add violabg/agentic-system-kit
 The skills CLI offers two groups: **Agentic System — orchestrator** and **Agentic System — legacy**. Pick the group of the system you want, or expand a group to pick single skills. To choose without the prompt:
 
 ```sh
-npx skills add violabg/agentic-system-kit --skill bootstrap-orchestrator-system --skill maintain-orchestrator-system
+npx skills add violabg/agentic-system-kit --skill bootstrap-orchestrator-system --skill maintain-orchestrator-system --skill improve-orchestrator-system
 ```
 
 When the CLI runs inside an agent session it may install every skill without asking; run it from a normal shell to choose.
@@ -32,9 +32,10 @@ One **orchestrator** role drives the workflow the developer chooses:
 A local Node runtime serves the workflow one instruction at a time and owns the session store, the design, the mechanical checks and the approval gate. The orchestrator never writes production code: it hands the code and the verifications to delegates (code implementor, design verifier, implementation verifier, documentation reviewer), each running in its own context. Two more roles answer project questions (`ask`) and build the project knowledge (`knowledge-builder`).
 
 - **`bootstrap-orchestrator-system`** installs the system. It asks which clients the team uses (Claude Code, Codex, GitHub Copilot in VS Code, OpenCode, Cursor, or another), where sessions should live (inside the repository and ignored by git, or outside it), and how the tracker and other integrations are reached. It then renders every file with a deterministic installer, merges client settings without losing existing ones, and verifies each client.
-- **`maintain-orchestrator-system`** upgrades an installation to a newer kit, applies changed decisions, or audits the installation. It merges the files the repository customized instead of overwriting them.
+- **`maintain-orchestrator-system`** upgrades an installation to a newer kit, applies changed decisions, records an approved local runtime fix, or audits the installation. It merges the files the repository customized instead of overwriting them.
+- **`improve-orchestrator-system`** audits one or more sessions by id: token use, adherence to the served flow, and gaps in the runtime, the knowledge or the issue. Each finding goes to its own action after you approve it: a local runtime fix, a report for the kit's maintainer, a brief for `knowledge-builder`, or an update through `manage-work-item`. It reads the session and the client transcripts you confirm, and never changes a session.
 
-Both skills change only agent-system files: role files, skills, routers, the runtime and its config, workflows, contracts, client settings for the runtime command, guides and the installation records. They never touch application code.
+These skills change only agent-system files: role files, skills, routers, the runtime and its config, workflows, contracts, client settings for the runtime command, guides and the installation records. They never touch application code.
 
 ## Legacy: Planner/Implementor system
 

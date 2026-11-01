@@ -4,10 +4,11 @@
   "groupings": [
     {
       "title": "Agentic System — orchestrator",
-      "description": "Install and maintain the orchestrator agentic system: served DESIGN, FAST_IMPLEMENTATION and DOCUMENTATION workflows, a local runtime and delegates with their own context.",
+      "description": "Install, maintain and improve the orchestrator agentic system: served DESIGN, FAST_IMPLEMENTATION and DOCUMENTATION workflows, a local runtime and delegates with their own context.",
       "skills": [
         "bootstrap-orchestrator-system",
-        "maintain-orchestrator-system"
+        "maintain-orchestrator-system",
+        "improve-orchestrator-system"
       ]
     },
     {

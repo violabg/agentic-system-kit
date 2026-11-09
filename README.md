@@ -25,11 +25,11 @@ When the CLI runs inside an agent session it may install every skill without ask
 
 One **orchestrator** role drives the workflow the developer chooses:
 
-- `DESIGN`: a structured design the developer reviews and approves in a review document, then implementation and verification.
-- `FAST_IMPLEMENTATION`: a quick path for simple or mechanical changes.
+- `DESIGN`: a structured design the orchestrator verifies against itself and the developer reviews and approves in a review document, then implementation and review.
+- `FAST_IMPLEMENTATION`: a quick path for simple or mechanical changes, with no design and no approval step.
 - `DOCUMENTATION`: a guide written from a template, then reviewed.
 
-A local Node runtime serves the workflow one instruction at a time and owns the session store, the design, the mechanical checks and the approval gate. The orchestrator never writes production code: it hands the code and the verifications to delegates (code implementor, design verifier, implementation verifier, documentation reviewer), each running in its own context. Two more roles answer project questions (`ask`) and build the project knowledge (`knowledge-builder`).
+A local Node runtime serves the workflow one instruction at a time and owns the session store, the design, the mechanical checks and the approval gate. In `DESIGN` the orchestrator never writes production code: it reviews its own design adversarially before you approve it, hands each batch of operations to the code implementor running in its own context, and reviews every work unit itself. In `FAST_IMPLEMENTATION` it implements the change directly, with its build and tests. In `DOCUMENTATION` a documentation reviewer checks the guide. The design verifier and implementation verifier roles are still installed, though no workflow step starts them. Two more roles answer project questions (`ask`) and build the project knowledge (`knowledge-builder`).
 
 - **`bootstrap-orchestrator-system`** installs the system. It asks which clients the team uses (Claude Code, Codex, GitHub Copilot in VS Code, OpenCode, Cursor, or another), where sessions should live (inside the repository and ignored by git, or outside it), and how the tracker and other integrations are reached. It then renders every file with a deterministic installer, merges client settings without losing existing ones, and verifies each client.
 - **`maintain-orchestrator-system`** upgrades an installation to a newer kit, applies changed decisions, records an approved local runtime fix, or audits the installation. It merges the files the repository customized instead of overwriting them.
